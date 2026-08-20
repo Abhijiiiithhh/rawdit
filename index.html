@@ -1601,6 +1601,173 @@ body.admin-mode .admin-only-control{display:inline-flex !important}
  .admin-user-date{grid-column:2;text-align:left;margin-top:-7px}
 }
 </style>
+
+<style>
+/* RAWDIT MOBILE ONLY — premium navigation + masonry feed */
+@media (max-width:800px){
+  header{
+    position:sticky;
+    top:0;
+    min-height:64px;
+    height:auto;
+    padding:10px 14px;
+    flex-wrap:nowrap;
+    gap:10px;
+  }
+  header .logo{font-size:22px}
+  header nav{
+    order:0;
+    width:auto;
+    min-width:0;
+    margin-left:auto;
+    display:flex !important;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
+    overflow:visible;
+    padding:0;
+  }
+  header nav > button:not(.nav-upload),
+  header nav > .admin-nav-button{
+    display:none !important;
+  }
+  header nav .nav-upload{
+    display:inline-flex !important;
+    align-items:center;
+    justify-content:center;
+    padding:9px 15px !important;
+    font-size:9px !important;
+  }
+  #rawditMobileMenuButton{
+    display:inline-flex;
+    width:38px;
+    height:38px;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #303030;
+    border-radius:50%;
+    background:#111;
+    color:#ddd;
+    font-size:17px;
+    line-height:1;
+  }
+  #rawditMobileMenuButton:hover{
+    background:#fff;
+    color:#000;
+    border-color:#fff;
+  }
+  #userProfile{margin-left:2px !important}
+  #userAvatar{width:30px !important;height:30px !important}
+
+  .photo-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    align-items:start !important;
+    gap:10px !important;
+  }
+  .photo-card{
+    aspect-ratio:auto !important;
+    height:auto !important;
+    overflow:hidden;
+  }
+  .photo-card .photo-image{
+    width:100%;
+    height:auto !important;
+    aspect-ratio:auto !important;
+    object-fit:cover;
+    display:block;
+  }
+  .photo-card .photo-placeholder{
+    height:220px !important;
+  }
+
+  /* Keep card text/actions readable below variable-height images */
+  .photo-card:after{
+    display:none;
+  }
+  .photo-card .photo-info{
+    position:static !important;
+    padding:9px 8px 3px !important;
+  }
+  .photo-card .photo-title{
+    font-size:10px !important;
+    color:#eee;
+  }
+  .photo-card .photo-user{
+    font-size:7px !important;
+    color:#777;
+    margin-top:3px;
+  }
+  .photo-card .photo-actions{
+    position:static !important;
+    padding:6px 8px 8px !important;
+  }
+  .photo-card .badge,
+  .photo-card .score{
+    top:8px !important;
+    padding:5px 7px !important;
+  }
+  .photo-card .badge{left:8px !important}
+  .photo-card .score{right:8px !important}
+
+  /* Full-screen premium mobile menu */
+  #rawditMobileMenu{
+    position:fixed;
+    inset:0;
+    z-index:100000;
+    display:none;
+    background:rgba(8,8,8,.97);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    padding:18px;
+  }
+  #rawditMobileMenu.open{display:block}
+  .rawdit-mobile-menu-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:2px 2px 20px;
+    border-bottom:1px solid #242424;
+  }
+  .rawdit-mobile-menu-brand{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-1px;
+  }
+  .rawdit-mobile-menu-close{
+    width:38px;
+    height:38px;
+    border:1px solid #303030;
+    border-radius:50%;
+    background:#111;
+    color:#ddd;
+    font-size:18px;
+  }
+  .rawdit-mobile-menu-links{
+    display:flex;
+    flex-direction:column;
+    margin-top:8px;
+  }
+  .rawdit-mobile-menu-links button{
+    width:100%;
+    padding:19px 5px;
+    border:0;
+    border-bottom:1px solid #1e1e1e;
+    background:transparent;
+    color:#aaa;
+    text-align:left;
+    font-size:14px;
+    font-weight:500;
+  }
+  .rawdit-mobile-menu-links button:hover{
+    color:#fff;
+    padding-left:10px;
+  }
+}
+@media (min-width:801px){
+  #rawditMobileMenuButton,#rawditMobileMenu{display:none !important}
+}
+</style>
+
 </head>
 <body>
 <div class="username-gate" id="usernameGate">
@@ -1629,6 +1796,7 @@ RAWDIT
 <small>BY ABHIJIIIITHHH</small>
 </a>
 <nav>
+<button type="button" id="rawditMobileMenuButton" aria-label="Open menu">☰</button>
 <button id="navRaw" onclick="showPage('raw')">RAW</button>
 <button id="navEdit" onclick="showPage('edit')">EDIT</button>
 <button id="navReview" onclick="showPage('review')">Review</button>
@@ -6369,6 +6537,71 @@ Run the one-time SQL supplied with this version before testing admin deletion.
     }
     const refresh=document.getElementById("adminRefreshUsers");
     if(refresh)refresh.onclick=loadAdminDashboard;
+  });
+})();
+</script>
+
+
+<div id="rawditMobileMenu" aria-hidden="true">
+  <div class="rawdit-mobile-menu-head">
+    <div class="rawdit-mobile-menu-brand">RAWDIT</div>
+    <button type="button" class="rawdit-mobile-menu-close" id="rawditMobileMenuClose" aria-label="Close menu">×</button>
+  </div>
+  <div class="rawdit-mobile-menu-links">
+    <button type="button" data-mobile-page="raw">RAW</button>
+    <button type="button" data-mobile-page="edit">EDIT</button>
+    <button type="button" data-mobile-page="review">REVIEW</button>
+    <button type="button" data-mobile-page="explore">EXPLORE</button>
+    <button type="button" data-mobile-page="challenges">CHALLENGES</button>
+    <button type="button" id="rawditMobileAdmin">ADMIN</button>
+  </div>
+</div>
+<script>
+(function(){
+  const menu=document.getElementById("rawditMobileMenu");
+  const openBtn=document.getElementById("rawditMobileMenuButton");
+  const closeBtn=document.getElementById("rawditMobileMenuClose");
+  if(!menu || !openBtn || !closeBtn) return;
+
+  function closeMenu(){
+    menu.classList.remove("open");
+    menu.setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
+  }
+  function openMenu(){
+    menu.classList.add("open");
+    menu.setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+  }
+
+  openBtn.addEventListener("click",openMenu);
+  closeBtn.addEventListener("click",closeMenu);
+
+  menu.querySelectorAll("[data-mobile-page]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const page=btn.getAttribute("data-mobile-page");
+      if(typeof showPage==="function") showPage(page);
+      closeMenu();
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  const admin=document.getElementById("rawditMobileAdmin");
+  if(admin){
+    admin.addEventListener("click",()=>{
+      closeMenu();
+      if(window.RAWDIT_ADMIN && typeof window.RAWDIT_ADMIN.login==="function"){
+        window.RAWDIT_ADMIN.login();
+      }else if(typeof openAdminLogin==="function"){
+        openAdminLogin();
+      }else{
+        alert("Admin login is unavailable.");
+      }
+    });
+  }
+
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape") closeMenu();
   });
 })();
 </script>
