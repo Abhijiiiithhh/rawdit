@@ -1454,8 +1454,8 @@ body.admin-mode .admin-only-control{display:inline-flex !important}
     width:100% !important;
     display:flex !important;
     align-items:center !important;
-    justify-content:flex-start !important;
-    gap:16px !important;
+    justify-content:space-between !important;
+    gap:0 !important;
     overflow-x:auto !important;
     overflow-y:hidden !important;
     padding:8px 2px 10px !important;
@@ -4788,7 +4788,10 @@ function showUsernameGate(){
 
 function hideUsernameGate(){
     const gate=document.getElementById("usernameGate");
-    if(gate)gate.classList.remove("show");
+    if(gate){
+        gate.classList.remove("show");
+        gate.style.display="none";
+    }
 }
 
 function createUsername(){
@@ -6314,6 +6317,12 @@ Run the one-time SQL supplied with this version before testing admin deletion.
 
                 if(typeof updateUsernameHeader==="function") updateUsernameHeader();
                 if(typeof hideUsernameGate==="function") hideUsernameGate();
+
+                const finalGate=document.getElementById("usernameGate");
+                if(finalGate){
+                    finalGate.classList.remove("show");
+                    finalGate.style.display="none";
+                }
 
                 if(typeof showToast==="function"){
                     showToast("Welcome to RAWDIT, @"+name);
