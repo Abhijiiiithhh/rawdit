@@ -96,9 +96,6 @@ nav button:hover,nav button.active{color:#fff}
 .explore-tools{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:28px}.search{display:flex;width:290px}
 .search input{width:100%;padding:11px 14px;background:#101010;border:1px solid #292929;border-right:0;border-radius:23px 0 0 23px;color:#fff;outline:none;font-size:9px}
 .search button{padding:0 15px;border:0;background:#fff;color:#000;border-radius:0 23px 23px 0;font-size:9px}
-.challenge-section{padding:52px 4% 72px}.challenge-card{padding:35px;background:#101010;border:1px solid #242424;border-radius:15px}
-.challenge-card small{color:#666;font-size:8px;letter-spacing:2px}.challenge-card h2{margin-top:11px;font-size:29px;letter-spacing:-1px}
-.challenge-card p{max-width:620px;margin-top:9px;color:#666;font-size:10px;line-height:1.7}
 .leaderboard{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:25px}.rank{padding:18px;background:#0d0d0d;border:1px solid #222;border-radius:10px}.rank small{color:#666;font-size:7px}.rank strong{display:block;margin-top:6px;font-size:25px}
 .upload-container{max-width:980px;margin:auto;padding:65px 4% 80px}.upload-title{text-align:center;margin-bottom:38px}
 .upload-title h1{font-size:43px;letter-spacing:-3px}.upload-title p{margin-top:8px;color:#666;font-size:10px}
@@ -411,7 +408,6 @@ header nav #userProfileName{display:none !important}
 }
 @media(max-width:520px){
 .rating-photo-card{max-width:320px}
-.section,.signature-section,.library-section,.challenge-section,.review-wrap,.upload-container,.raw-detail{padding-left:17px;padding-right:17px}
 .photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.small-grid{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}
 .hero h1{font-size:52px;letter-spacing:-3.5px}.hero-buttons{flex-direction:column}.btn{width:220px}
 .page-hero{padding:62px 17px 40px}.upload-title h1{font-size:35px}.comparison-slider{width:min(100%,360px);border-radius:13px}
@@ -709,252 +705,7 @@ header nav #userProfileName{display:none !important}
 #nextReviewButton:disabled{opacity:.45 !important;cursor:not-allowed !important}
 
 
-/* CHALLENGES */
-.challenge-section{max-width:1180px;margin:0 auto;padding:30px 24px 80px}
-.challenge-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:24px}
-.challenge-head small,.challenge-detail-copy>small{font-size:7px;letter-spacing:2px;color:#666}
-.challenge-head h2{margin:7px 0 5px;font-size:25px;letter-spacing:-.8px}
-.challenge-head p{margin:0;color:#777;font-size:9px}
-.challenge-count{font-size:8px;color:#777;border:1px solid #292929;border-radius:20px;padding:8px 11px}
-.challenge-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.challenge-item{border:1px solid #292929;background:#101010;border-radius:12px;overflow:hidden;cursor:pointer;transition:.2s}
-.challenge-item:hover{border-color:#555;transform:translateY(-2px)}
-.challenge-item-image{aspect-ratio:3/4;overflow:hidden;background:#151515}
-.challenge-item-image img{width:100%;height:100%;object-fit:cover;display:block}
-.challenge-item-body{padding:14px}
-.challenge-item-body small{color:#666;font-size:7px;letter-spacing:1px}
-.challenge-item-body h3{margin:6px 0;font-size:15px}
-.challenge-item-body p{margin:0;color:#777;font-size:8px;line-height:1.6}
-.challenge-item-meta{display:flex;justify-content:space-between;gap:8px;margin-top:13px;color:#777;font-size:7px}
-.challenge-item-meta strong{color:#aaa;font-weight:500}
-.challenge-detail{margin-top:20px;border-top:1px solid #252525;padding-top:20px}
-.challenge-back{border:0;background:transparent;color:#777;font-size:8px;cursor:pointer;padding:5px 0}
-.challenge-back:hover{color:#fff}
-.challenge-detail-grid{display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:30px;margin-top:18px}
-.challenge-raw-preview{position:relative;aspect-ratio:3/4;border-radius:12px;overflow:hidden;background:#151515}
-.challenge-raw-preview img{width:100%;height:100%;object-fit:cover}
-.challenge-badge{position:absolute;z-index:2;left:10px;top:10px;background:rgba(0,0,0,.7);border:1px solid #444;border-radius:20px;padding:6px 8px;color:#aaa;font-size:7px}
-.challenge-detail-copy{padding:12px 0}
-.challenge-detail-copy h2{font-size:28px;margin:8px 0}
-.challenge-detail-copy>p{max-width:620px;color:#777;font-size:9px;line-height:1.8}
-.challenge-stats{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
-.challenge-stat{border:1px solid #292929;border-radius:9px;padding:10px 12px;min-width:95px}
-.challenge-stat small{display:block;color:#555;font-size:6px}
-.challenge-stat strong{display:block;margin-top:4px;font-size:12px}
-.challenge-rules{border-top:1px solid #292929;padding-top:15px;margin-top:15px}
-.challenge-rules h4{font-size:9px;margin:0 0 8px}
-.challenge-rules ul{padding-left:18px;color:#777;font-size:8px;line-height:1.9}
-.challenge-entries{margin-top:35px;border-top:1px solid #292929;padding-top:20px}
-.challenge-entry-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.challenge-entry-head h3{font-size:13px;margin:0}
-.challenge-entry-head span{font-size:7px;color:#666}
-@media(max-width:1100px){.challenge-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:900px){.challenge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.challenge-detail-grid{grid-template-columns:1fr}.challenge-raw-preview{max-width:360px}}
-@media(max-width:600px){.challenge-grid{grid-template-columns:1fr}.challenge-head{align-items:flex-start;flex-direction:column}}
-
-
-/* CHALLENGE DETAIL NAVIGATION */
-.challenge-back{
-    display:inline-flex !important;
-    align-items:center !important;
-    gap:7px !important;
-    border:1px solid #333 !important;
-    background:#111 !important;
-    color:#aaa !important;
-    padding:9px 12px !important;
-    border-radius:8px !important;
-    font-size:8px !important;
-    cursor:pointer !important;
-}
-.challenge-back:hover{background:#fff !important;color:#000 !important;border-color:#fff !important}
-.challenge-submit-row{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-top:20px;
-}
-.challenge-submit-note{
-    color:#555;
-    font-size:7px;
-}
-
-
-/* INLINE CHALLENGE UPLOAD */
-.challenge-inline-upload{
-    margin-top:18px;
-    padding:18px;
-    border:1px solid #292929;
-    border-radius:12px;
-    background:#0d0d0d;
-}
-.challenge-upload-head{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:15px;
-    padding-bottom:15px;
-    border-bottom:1px solid #242424;
-}
-.challenge-upload-head small{font-size:7px;letter-spacing:2px;color:#666}
-.challenge-upload-head h3{margin:6px 0 4px;font-size:15px}
-.challenge-upload-head p{margin:0;color:#666;font-size:8px}
-.challenge-upload-close{
-    border:1px solid #333;background:#151515;color:#999;border-radius:20px;
-    padding:8px 11px;font-size:8px;cursor:pointer;white-space:nowrap;
-}
-.challenge-upload-close:hover{background:#fff;color:#000}
-.challenge-upload-grid{
-    display:grid;
-    grid-template-columns:minmax(220px,1fr) minmax(260px,1fr);
-    gap:14px;
-    margin-top:15px;
-}
-.challenge-upload-drop{
-    min-height:270px;
-    border:1px dashed #353535;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    background:#111;
-    overflow:hidden;
-}
-.challenge-upload-drop strong{display:block;font-size:11px}
-.challenge-upload-drop span{display:block;margin:6px 0 14px;color:#666;font-size:7px}
-.challenge-upload-icon{
-    width:32px;height:32px;border:1px solid #333;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    margin:0 auto 10px;color:#aaa;font-size:14px;
-}
-.challenge-file-button{
-    display:inline-block;padding:9px 14px;border-radius:20px;
-    background:#fff;color:#000;font-size:8px;cursor:pointer;
-}
-#challengeFileInput{display:none}
-#challengeUploadPreview{width:100%;height:100%;padding:10px}
-#challengePreviewImage{
-    display:block;width:100%;height:230px;object-fit:contain;
-    border-radius:7px;background:#090909;
-}
-#challengePreviewName{margin-top:6px;color:#666;font-size:7px;text-align:left}
-.challenge-upload-fields{
-    display:flex;flex-direction:column;gap:6px;
-    padding:3px;
-}
-.challenge-upload-fields label{color:#666;font-size:7px;letter-spacing:1px;margin-top:4px}
-.challenge-upload-fields input{
-    width:100%;box-sizing:border-box;padding:11px;
-    background:#101010;color:#fff;border:1px solid #292929;
-    border-radius:8px;outline:none;font-size:9px;
-}
-.challenge-publish-button{margin-top:auto;width:max-content}
-@media(max-width:700px){
-    .challenge-upload-grid{grid-template-columns:1fr}
-}
-
-
-/* CHALLENGE PARTICIPANTS / WINNER */
-.challenge-entries .photo-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-.challenge-entry-card{border:1px solid #292929;border-radius:12px;overflow:hidden;background:#101010}
-.challenge-entry-card.challenge-winner{border-color:#777}
-.challenge-entry-image{position:relative;aspect-ratio:3/4;background:#151515}
-.challenge-entry-image img{width:100%;height:100%;object-fit:cover;display:block}
-.participant-badge,.winner-badge{
-    position:absolute;left:9px;top:9px;padding:6px 8px;border-radius:20px;
-    background:rgba(0,0,0,.88);border:1px solid #444;color:#aaa;font-size:6px;
-}
-.winner-badge{color:#fff;border-color:#777}
-.challenge-entry-body{padding:11px}
-.challenge-entry-body h4{margin:0 0 4px;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.challenge-entry-user{font-size:7px;color:#666}
-.challenge-delete-entry{
-    border:1px solid #4a2a2a;
-    background:#151010;
-    color:#d88;
-    border-radius:18px;
-    padding:7px 10px;
-    font-size:7px;
-    cursor:pointer;
-}
-body.admin-mode .challenge-delete-entry:hover{
-    background:#fff;
-    color:#000;
-    border-color:#fff;
-}
-
-.challenge-entry-actions{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-top:10px}
-.challenge-view-entry,.challenge-pick-winner{
-    border:1px solid #333;background:#151515;color:#aaa;border-radius:18px;
-    padding:7px 9px;font-size:7px;cursor:pointer;white-space:nowrap;
-}
-.challenge-pick-winner{background:#fff;color:#000;border-color:#fff}
-.challenge-view-entry:hover{background:#fff;color:#000}
-.winner-released{font-size:6px;color:#aaa}
-@media(max-width:900px){.challenge-entries .photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.challenge-entries .photo-grid{grid-template-columns:1fr}}
-
-
-.challenge-one-photo{
-    margin:0 14px 14px;
-    padding:7px 8px;
-    border:1px solid #292929;
-    border-radius:7px;
-    color:#777;
-    font-size:6px;
-    letter-spacing:1px;
-    text-align:center;
-}
-
-
-.username-winner-tag{
-    display:inline-flex;
-    align-items:center;
-    margin-left:5px;
-    padding:3px 6px;
-    border:1px solid #666;
-    border-radius:10px;
-    color:#ddd;
-    font-size:5px;
-    letter-spacing:.4px;
-    vertical-align:middle;
-}
-.challenge-entry-user{
-    display:flex;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:2px;
-}
-
-
-.challenge-item-image{position:relative}
-.challenge-cover-button{
-    position:absolute;
-    right:9px;
-    top:9px;
-    z-index:3;
-    border:1px solid #555;
-    background:rgba(0,0,0,.78);
-    color:#ddd;
-    border-radius:16px;
-    padding:6px 9px;
-    font-size:6px;
-    cursor:pointer;
-    opacity:1;
-    transition:opacity .18s ease;
-}
-.challenge-cover-button:hover{background:#fff;color:#000}
-.challenge-cover-input{display:none}
-@media(max-width:700px){
-    .challenge-cover-button{opacity:1}
-}
-
-
 /* ADMIN MODE */
-.challenge-cover-button,
-.challenge-cover-input{display:none !important}
-body.admin-mode .challenge-cover-button{display:block !important}
-body.admin-mode .challenge-cover-input{display:none !important}
 
 .admin-nav-button{
     border:1px solid #333;
@@ -1067,20 +818,6 @@ body.admin-mode .admin-badge{display:flex}
 
 .admin-only-control{display:none !important}
 body.admin-mode .admin-only-control{display:inline-flex !important}
-.challenge-completed{
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-    margin-left:8px;
-    padding:4px 7px;
-    border:1px solid #555;
-    border-radius:12px;
-    color:#bbb;
-    font-size:6px;
-    letter-spacing:.5px;
-}
-
-
 /* RAWDIT: compact medium review workspace */
 .rating-layout{
   display:grid !important;
@@ -1113,41 +850,6 @@ body.admin-mode .admin-only-control{display:inline-flex !important}
 }
 
 
-/* RAWDIT: challenge participant capacity */
-.challenge-capacity{
-  margin-top:8px;
-  color:#888;
-  font-size:8px;
-  letter-spacing:.2px;
-}
-.challenge-capacity strong{color:#eee}
-.challenge-finished{
-  display:inline-flex;
-  margin-top:9px;
-  padding:6px 9px;
-  border:1px solid #333;
-  border-radius:999px;
-  color:#999;
-  font-size:7px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-.challenge-item.challenge-closed{
-  opacity:.78;
-}
-.challenge-closed-message{
-  margin-top:12px;
-  padding:12px 14px;
-  border:1px solid #292929;
-  border-radius:10px;
-  background:#0c0c0c;
-  color:#999;
-  font-size:9px;
-  line-height:1.5;
-}
-.challenge-closed-message strong{color:#eee}
-
-
 /* RAWDIT homepage — populated community sections */
 .home-section{margin:72px 54px 0}
 .home-section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
@@ -1173,87 +875,6 @@ body.admin-mode .admin-only-control{display:inline-flex !important}
 .home-card-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .home-card-meta{margin-top:5px;color:#777;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .home-empty{grid-column:1/-1;border:1px dashed #292929;border-radius:14px;padding:28px;color:#666;text-align:center;font-size:11px}
-.home-challenge-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.home-challenge{overflow:hidden;background:#111;border:1px solid #292929;border-radius:14px}
-.home-challenge-cover{aspect-ratio:16/9;background:#151515;overflow:hidden}
-.home-challenge-cover img{width:100%;height:100%;object-fit:cover;display:block}
-.home-challenge-body{padding:14px}
-.home-challenge-label{font-size:8px;letter-spacing:.18em;color:#777;text-transform:uppercase}
-.home-challenge-title{margin:6px 0 8px;font-size:15px;font-weight:600}
-.home-challenge-meta{display:flex;justify-content:space-between;color:#777;font-size:9px}
-.home-challenge-meta strong{color:#ddd}
-.home-challenge-button{display:block;margin-top:12px;padding:9px 12px;border:1px solid #333;border-radius:999px;color:#ddd;text-align:center;text-decoration:none;font-size:9px}
-.home-challenge-button:hover{background:#f5f5f5;color:#111}
-.home-footer{margin-top:90px;padding:28px 0 45px;border-top:1px solid #222;color:#666;font-size:9px;display:flex;justify-content:space-between;gap:20px}
-@media(max-width:1000px){
-  .home-grid{grid-template-columns:repeat(3,250px)} .home-challenge-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
-@media(max-width:720px){
-  .home-grid{grid-template-columns:repeat(2,250px)} .home-challenge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .home-section{margin-top:52px}
-}
-@media(max-width:480px){
-  .home-grid{grid-template-columns:1fr} .home-challenge-grid{grid-template-columns:1fr}
-}
-
-
-/* RAWDIT: real Top Rated This Week cards */
-.top-rated-real-grid{
-  display:grid;
-  grid-template-columns:repeat(6,minmax(0,1fr));
-  gap:10px;
-}
-.top-rated-real-card{
-  display:block;
-  min-width:0;
-  overflow:hidden;
-  background:#111;
-  border:1px solid #292929;
-  border-radius:12px;
-  color:inherit;
-  text-decoration:none;
-}
-.top-rated-real-image{
-  position:relative;
-  aspect-ratio:3/4;
-  background:#151515;
-  overflow:hidden;
-}
-.top-rated-real-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.top-rated-real-badge,
-.top-rated-real-score{
-  position:absolute;
-  top:8px;
-  padding:4px 7px;
-  border:1px solid #333;
-  border-radius:999px;
-  background:#0b0b0bdd;
-  font-size:7px;
-  line-height:1;
-}
-.top-rated-real-badge{left:8px}
-.top-rated-real-score{right:8px}
-.top-rated-real-info{padding:9px 10px 10px}
-.top-rated-real-title{
-  font-size:10px;
-  font-weight:600;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.top-rated-real-user{
-  margin-top:4px;
-  color:#777;
-  font-size:8px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
 @media(max-width:1050px){
   .top-rated-real-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
@@ -1758,7 +1379,6 @@ RAWDIT
 <button id="navEdit" onclick="showPage('edit')">EDIT</button>
 <button id="navReview" onclick="showPage('review')">Review</button>
 <button id="navExplore" onclick="showPage('explore')">Explore</button>
-<button id="navChallenges" onclick="showPage('challenges')">Challenges</button>
 <button class="nav-upload" onclick="showPage('upload')">Upload</button>
 <button type="button" class="admin-nav-button" id="adminNavButton">Admin</button>
 
@@ -2186,159 +1806,6 @@ RAWDIT
 </section>
 </main>
 
-<!-- CHALLENGES -->
-<main id="challenges" class="page">
-<div class="page-hero"><small>COMPETE</small><h1>Challenges</h1><p>Everyone edits the same RAW. Your creativity against everyone else's.</p></div>
-<section class="challenge-section">
-<div class="challenge-head">
-<div>
-<small>ACTIVE NOW</small>
-<h2>Choose a challenge.</h2>
-<p>Same RAW. Different vision. The community decides.</p>
-</div>
-<div class="challenge-count" id="challengeCount">4 ACTIVE</div>
-</div>
-
-<div class="challenge-grid" id="challengeGrid"></div>
-
-<div class="challenge-detail" id="challengeDetail" style="display:none">
-<button type="button" class="challenge-back" id="challengeBackButton">← Back to Challenges</button>
-<div class="challenge-detail-grid">
-<div class="challenge-raw-preview">
-<div class="challenge-badge">CHALLENGE RAW</div>
-<img id="challengeRawImage" alt="Challenge RAW">
-</div>
-<div class="challenge-detail-copy">
-<small id="challengeDetailStatus">ACTIVE CHALLENGE</small>
-<h2 id="challengeDetailTitle"></h2>
-<p id="challengeDetailDescription"></p>
-<div class="challenge-stats" id="challengeDetailStats"></div>
-<div class="challenge-rules">
-<h4>Rules</h4>
-<ul>
-<li>Edit the supplied RAW photograph.</li>
-<li>Keep the original RAW linked to your EDIT.</li>
-<li>One EDIT entry per username for this challenge.</li>
-<li>Community reviews decide the ranking.</li>
-</ul>
-</div>
-<div class="challenge-submit-row">
-    <button type="button" class="btn btn-primary" id="challengeUploadButton">Upload EDIT to this challenge</button>
-    <span class="challenge-submit-note">Upload directly from this challenge page.</span>
-</div>
-
-<div class="challenge-inline-upload" id="challengeInlineUpload" style="display:none">
-    <div class="challenge-upload-head">
-        <div>
-            <small>CHALLENGE SUBMISSION</small>
-            <h3 id="challengeUploadTitle">Upload your EDIT</h3>
-            <p>Your EDIT will automatically be linked to this challenge RAW.</p>
-        </div>
-        <button type="button" class="challenge-upload-close" id="challengeUploadClose">Cancel</button>
-    </div>
-
-    <div class="challenge-upload-grid">
-        <div class="challenge-upload-drop" id="challengeDropZone">
-            <div id="challengeUploadEmpty">
-                <div class="challenge-upload-icon">↑</div>
-                <strong>Choose your EDIT</strong>
-                <span>JPG, JPEG, PNG or WEBP</span>
-                <label class="challenge-file-button" for="challengeFileInput">Choose Photo</label>
-                <input id="challengeFileInput" type="file" accept="image/jpeg,image/png,image/webp">
-            </div>
-            <div id="challengeUploadPreview" style="display:none">
-                <img id="challengePreviewImage" alt="EDIT preview">
-                <div id="challengePreviewName"></div>
-            </div>
-        </div>
-
-        <div class="challenge-upload-fields">
-            <label>TITLE</label>
-            <input id="challengePhotoTitle" placeholder="Give your edit a title">
-
-            <label>EDITING SOFTWARE</label>
-            <input id="challengePhotoSoftware" placeholder="e.g. Lightroom, Photoshop, Mobile">
-
-            <label>TAGS</label>
-            <input id="challengePhotoTags" placeholder="#cinematic #moody #travel">
-
-            <button type="button" class="btn btn-primary challenge-publish-button" id="challengePublishButton">
-                Publish EDIT to Challenge
-            </button>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-
-<div class="challenge-entries">
-<div class="challenge-entry-head"><h3>Current entries</h3><span id="challengeEntryCount">0 entries</span></div>
-<div class="photo-grid" id="challengeEntryGrid"></div>
-</div>
-</div>
-</section>
-</main>
-
-<!-- UPLOAD -->
-<main id="upload" class="page">
-<div class="upload-container">
-<div class="upload-title"><h1>Upload to RAWDIT.</h1><p>Choose RAW or EDIT, add your details, and publish it locally.</p></div>
-
-<div class="upload-types">
-<div class="type-card selected" id="rawType" onclick="selectUploadType('raw')">
-<div class="type-icon">📷</div><h3>RAW</h3><p>Upload your original, non-edited photograph.</p>
-</div>
-<div class="type-card" id="editType" onclick="selectUploadType('edit')">
-<div class="type-icon">🎨</div><h3>EDIT</h3><p>Upload your edited photograph and connect it to a RAW.</p>
-</div>
-</div>
-
-<div class="drop-zone" id="dropZone">
-<div><h3>Drop your photo here</h3><p>JPG, JPEG, PNG or WEBP</p><label class="file-button" for="fileInput">Choose Photo</label><input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp"></div>
-</div>
-
-<div class="upload-workspace">
-<div class="preview" id="preview"><img id="previewImage" alt="Photo preview"><div class="file-name" id="fileName"></div></div>
-
-<div class="upload-form" id="uploadForm">
-<div class="form-grid">
-<div class="field full"><label>TITLE</label><input id="photoTitle" placeholder="Give your photo a title"></div>
-<div class="field"><label>CATEGORY</label><select id="photoCategory"><option>Landscape</option><option>Portrait</option><option>Travel</option><option>Street</option><option>Nature</option><option>Architecture</option><option>Cars</option><option>Lifestyle</option><option>Night</option><option>Other</option></select></div>
-<div class="field"><label>CAMERA / DEVICE</label><input id="photoDevice" placeholder="e.g. iPhone 17"></div>
-<div class="field" id="softwareField" style="display:none"><label>EDITING SOFTWARE</label><input id="photoSoftware" placeholder="e.g. Lightroom"></div>
-<div class="field"><label>TAGS</label><input id="photoTags" placeholder="#travel #moody #portrait"></div>
-</div>
-
-<div id="linkSelectWrap" class="link-select-wrap">
-<label>LINK THIS EDIT TO A RAW</label>
-
-<select id="rawLinkSelect" aria-hidden="true" tabindex="-1" style="display:none"></select>
-
-<div class="raw-picker" id="rawPicker">
-    <button type="button" class="raw-picker-trigger" id="rawPickerTrigger">
-        <span class="raw-picker-thumb" style="display:flex;align-items:center;justify-content:center;font-size:7px;color:#555">RAW</span>
-        <span class="raw-picker-text">
-            <span class="raw-picker-title" id="rawPickerTitle">Choose a RAW...</span>
-            <span class="raw-picker-meta" id="rawPickerMeta">Select the original photo for this EDIT</span>
-        </span>
-        <span class="raw-picker-arrow">⌄</span>
-    </button>
-    <div class="raw-picker-menu" id="rawPickerMenu"></div>
-</div>
-</div>
-
-<label class="checkbox"><input id="publicPhoto" type="checkbox" checked>Public — anyone can view this photo</label>
-<div class="publish-row">
-<button type="button" class="upload-cancel" id="uploadCancelButton">Cancel</button>
-<button class="publish" onclick="publishPhoto()">Publish to RAWDIT</button>
-</div>
-</div>
-</div>
-</div>
-</main>
-
-
-<!-- ADMIN DASHBOARD -->
 <main id="adminDashboard" class="page">
 <section class="admin-dashboard-wrap">
   <div class="admin-dashboard-head">
@@ -2375,7 +1842,7 @@ RAWDIT
 
 <footer>
 <div><div class="footer-brand">RAWDIT<span>Edit. Compare. Rate.</span></div></div>
-<div class="footer-column"><h4>Community</h4><p>Guidelines</p><p>Leaderboard</p><p>Challenges</p></div>
+<div class="footer-column"><h4>Community</h4><p>Guidelines</p><p>Leaderboard</p></div>
 <div class="footer-column"><h4>Support</h4><p>Help Center</p><p>Contact</p><p>Report</p></div>
 <div class="footer-column"><h4>Legal</h4><p>Terms</p><p>Privacy</p><p>Cookies</p></div>
 <div class="footer-column"><h4>RAWDIT</h4><p>© 2026 RAWDIT</p><p>All rights reserved.</p></div>
@@ -2396,7 +1863,7 @@ function showPage(page){
 
     document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));
 
-    const map={raw:"navRaw",edit:"navEdit",review:"navReview",explore:"navExplore",challenges:"navChallenges"};
+    const map={raw:"navRaw",edit:"navEdit",review:"navReview",explore:"navExplore"};
     if(map[page]) document.getElementById(map[page]).classList.add("active");
 }
 
@@ -2700,7 +2167,6 @@ function publishPhoto(){
 
 /* RESET */
 function resetUploadForm(){
-    const challengeField=document.getElementById("challengeId");
 
     const rawSelect=document.getElementById("rawLinkSelect");
     if(rawSelect) rawSelect.value="";
@@ -2803,20 +2269,15 @@ function updateLibraryCount(id,count,type){
 function renderUploads(){
     const uploads=getUploads();
 
-    const raws=uploads.filter(item=>item.type==="raw" && !item.challengeOnly);
-    const edits=uploads.filter(item=>
-        item.type==="edit" &&
-        (!item.challengeId || item.challengeWinner===true)
-    );
+    const raws=uploads.filter(item=>item.type==="raw");
+    const edits=uploads.filter(item=>item.type==="edit");
 
     const filteredRaws=filterRawItems(raws,activeRawFilter);
     const filteredEdits=filterEditItems(edits,activeEditFilter);
 
     renderGrid("rawGrid",filteredRaws,"RAW");
     renderGrid("editGrid",filteredEdits,"EDIT");
-    renderExplore(uploads.filter(item=>
-        !item.challengeId || item.challengeWinner===true
-    ));
+    renderExplore(uploads);
 
     updateLibraryCount("rawCount",filteredRaws.length,"RAW");
     updateLibraryCount("editCount",filteredEdits.length,"EDIT");
@@ -4232,537 +3693,6 @@ function showToast(message){
 
 
 
-/* STEP 9 — CHALLENGES */
-const RAWDIT_CHALLENGES=[
-    {
-        id:"challenge-01",
-        title:"Best Night Edit",
-        status:"ACTIVE",
-        description:"Turn the supplied RAW into your strongest night-time interpretation. Natural, cinematic or experimental — your choice.",
-        deadline:"Open",
-        entries:0,
-        rawId:null
-    },
-    {
-        id:"challenge-02",
-        title:"Natural Light",
-        status:"ACTIVE",
-        description:"Make the photograph look better without losing the feeling of the original light. Clean, natural edits win.",
-        deadline:"Open",
-        entries:0,
-        rawId:null
-    },
-    {
-        id:"challenge-03",
-        title:"Your Signature",
-        status:"COMMUNITY",
-        description:"Take a RAW and create an edit that instantly feels like your own style.",
-        deadline:"Open",
-        entries:0,
-        rawId:null
-    },
-    {
-        id:"challenge-04",
-        title:"Best Edit Wins",
-        status:"ACTIVE",
-        description:"One photo. Your best edit. Everyone gets the same image, and the strongest edit wins.",
-        deadline:"Open",
-        entries:0,
-        rawId:null
-    }
-];
-
-let activeChallenge=null;
-
-function getChallengeRaw(challenge){
-    const uploads=getUploads();
-    if(challenge.rawId){
-        return uploads.find(x=>x.id===challenge.rawId && x.type==="raw")||null;
-    }
-    return uploads.find(x=>x.type==="raw")||null;
-}
-
-function getChallengeEntries(challenge){
-    const uploads=getUploads();
-    return uploads.filter(x=>x.type==="edit" && x.challengeId===challenge.id);
-}
-
-
-function getChallengeCover(challenge){
-    try{
-        const saved=localStorage.getItem("rawdit_challenge_cover_"+challenge.id);
-        if(saved)return saved;
-    }catch(e){}
-    const raw=getChallengeRaw(challenge);
-    return raw ? raw.image : "";
-}
-
-function changeChallengeCover(challengeId){
-    if(!document.body.classList.contains("admin-mode")){
-        showToast("Admin access required.");
-        return;
-    }
-    const input=document.getElementById("challengeCoverInput_"+challengeId);
-    if(input)input.click();
-}
-
-function handleChallengeCoverChange(challengeId,input){
-    if(!document.body.classList.contains("admin-mode")){
-        if(input)input.value="";
-        showToast("Admin access required.");
-        return;
-    }
-
-    const file=input && input.files && input.files[0];
-    if(!file)return;
-
-    if(!file.type.startsWith("image/")){
-        showToast("Please choose an image.");
-        input.value="";
-        return;
-    }
-
-    const reader=new FileReader();
-    reader.onload=function(e){
-        try{
-            localStorage.setItem("rawdit_challenge_cover_"+challengeId,e.target.result);
-        }catch(err){
-            showToast("Cover image is too large. Try a smaller photo.");
-            input.value="";
-            return;
-        }
-
-        const challenge=RAWDIT_CHALLENGES.find(x=>x.id===challengeId);
-        if(challenge){
-            renderChallenges();
-            if(activeChallenge && activeChallenge.id===challengeId){
-                renderChallengeDetail(challenge);
-            }
-        }
-
-        showToast("Challenge cover updated.");
-        input.value="";
-    };
-    reader.readAsDataURL(file);
-}
-
-function renderChallenges(){
-    const grid=document.getElementById("challengeGrid");
-    const detail=document.getElementById("challengeDetail");
-    const count=document.getElementById("challengeCount");
-    if(!grid)return;
-
-    if(detail)detail.style.display=activeChallenge?"block":"none";
-    grid.style.display=activeChallenge?"none":"grid";
-
-    const uploads=getUploads();
-    const participantCount=challenge=>{
-        const names=new Set(
-            getChallengeEntries(challenge)
-                .map(x=>String(x.username||x.userId||"Anonymous").toLowerCase())
-        );
-        return names.size;
-    };
-    const isFinished=challenge=>{
-        return challenge.status==="COMPLETED" ||
-            uploads.some(entry=>entry.challengeId===challenge.id && entry.challengeWinner===true);
-    };
-
-    const activeCount=RAWDIT_CHALLENGES.filter(x=>{
-        return x.status==="ACTIVE" && !isFinished(x);
-    }).length;
-    if(count)count.textContent=activeCount+" ACTIVE";
-
-    if(activeChallenge){
-        renderChallengeDetail(activeChallenge);
-        return;
-    }
-
-    grid.innerHTML=RAWDIT_CHALLENGES.map(challenge=>{
-        const raw=getChallengeRaw(challenge);
-        const entries=getChallengeEntries(challenge);
-        const participants=participantCount(challenge);
-        const finished=isFinished(challenge);
-        const full=participants>=20;
-
-        return `
-        <article class="challenge-item ${finished||full?"challenge-closed":""}" onclick="openChallenge('${challenge.id}')">
-            <div class="challenge-item-image">
-                ${getChallengeCover(challenge)
-                    ? `<img src="${getChallengeCover(challenge)}" alt="${escapeHTML(challenge.title)}">`
-                    : `<div class="challenge-placeholder">RAW</div>`}
-                <button type="button"
-                    class="challenge-cover-button"
-                    onclick="event.stopPropagation();changeChallengeCover('${challenge.id}')">
-                    Change cover
-                </button>
-                <input
-                    id="challengeCoverInput_${challenge.id}"
-                    class="challenge-cover-input"
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp"
-                    onchange="handleChallengeCoverChange('${challenge.id}',this)"
-                >
-            </div>
-            <div class="challenge-item-body">
-                <small>${finished ? "FINISHED" : full ? "FULL" : challenge.status}</small>
-                <h3>${escapeHTML(challenge.title)}</h3>
-                <p>${escapeHTML(challenge.description)}</p>
-                <div class="challenge-item-meta">
-                    <span>Deadline <strong>${escapeHTML(challenge.deadline)}</strong></span>
-                    <span>Participants <strong>${participants}/20</strong></span>
-                </div>
-                <div class="challenge-capacity"><strong>${participants}/20</strong> participants</div>
-                ${finished
-                    ? '<div class="challenge-finished">Challenge finished</div>'
-                    : full
-                        ? '<div class="challenge-finished">20/20 • Challenge full</div>'
-                        : ''}
-                ${challenge.id==="challenge-04"
-                    ? '<div class="challenge-one-photo">ONE PHOTO • BEST EDIT WINS</div>'
-                    : ''}
-            </div>
-        </article>`;
-    }).join("");
-}
-
-function openChallenge(id){
-    activeChallenge=RAWDIT_CHALLENGES.find(x=>x.id===id)||null;
-    renderChallenges();
-    document.getElementById("challenges")?.scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-function closeChallenge(){
-    activeChallenge=null;
-    const detail=document.getElementById("challengeDetail");
-    const grid=document.getElementById("challengeGrid");
-    if(detail)detail.style.display="none";
-    if(grid)grid.style.display="grid";
-    renderChallenges();
-    window.scrollTo({top:0,behavior:"smooth"});
-}
-
-
-function challengeEntryCardHTML(item,challenge){
-    const winner=item.challengeWinner===true;
-    const username=item.username || "Anonymous";
-
-    return `
-    <article class="challenge-entry-card ${winner?"challenge-winner":""}">
-        <div class="challenge-entry-image">
-            <img src="${item.image}" alt="${escapeHTML(item.title||"Challenge entry")}">
-            <span class="${winner?"winner-badge":"participant-badge"}">
-                ${winner?"🏆 WINNER":"PARTICIPANT"}
-            </span>
-        </div>
-        <div class="challenge-entry-body">
-            <h4>${escapeHTML(item.title||"Untitled EDIT")}</h4>
-            <div class="challenge-entry-user">
-                @${escapeHTML(username)}
-                ${winner ? '<span class="username-winner-tag">🏆 WINNER</span>' : ''}
-            </div>
-            <div class="challenge-entry-actions">
-                <button type="button" class="challenge-view-entry"
-                    onclick="viewChallengeEntry('${item.id}')">View</button>
-                ${
-                    winner
-                    ? `<span class="winner-released">Released to EDITs</span>`
-                    : `<button type="button" class="challenge-pick-winner admin-only-control"
-                        onclick="pickChallengeWinner('${challenge.id}','${item.id}')">Pick Winner</button>`
-                }
-                <button type="button"
-                    class="challenge-delete-entry admin-only-control"
-                    onclick="event.stopPropagation();deleteChallengeEntry('${item.id}')">
-                    Delete
-                </button>
-            </div>
-        </div>
-    </article>`;
-}
-
-function deleteChallengeEntry(entryId){
-    if(!document.body.classList.contains("admin-mode")){
-        showToast("Admin access required.");
-        return;
-    }
-
-    const item=getUploads().find(x=>String(x.id)===String(entryId));
-    if(!item){
-        showToast("Challenge photo not found.");
-        return;
-    }
-
-    if(String(item.type).toLowerCase()!=="edit" || !item.challengeId){
-        showToast("This is not a challenge photo.");
-        return;
-    }
-
-    deleteUpload(entryId);
-}
-
-function viewChallengeEntry(id){
-    const item=getUploads().find(x=>x.id===id);
-    if(!item)return;
-
-    if(typeof openPhotoDetail==="function"){
-        openPhotoDetail(id);
-    }else{
-        showToast(item.title||"Challenge entry");
-    }
-}
-
-function pickChallengeWinner(challengeId,entryId){
-    let admin=false;
-    try{admin=sessionStorage.getItem("rawdit_admin_session_v1")==="1";}catch(e){}
-    if(!admin){
-        showToast("Admin access required to pick a winner.");
-        return;
-    }
-
-    const uploads=getUploads();
-    const entry=uploads.find(x=>x.id===entryId && x.challengeId===challengeId);
-    if(!entry)return;
-
-    const hasWinner=uploads.some(x=>
-        x.challengeId===challengeId && x.challengeWinner===true
-    );
-
-    if(hasWinner){
-        showToast("A winner has already been selected.");
-        return;
-    }
-
-    if(!window.confirm("Pick this EDIT as the winner? Only this EDIT will be released to the normal EDITs and Explore pages.")){
-        return;
-    }
-
-    entry.challengeWinner=true;
-    entry.challengeOnly=false;
-    entry.winnerAt=new Date().toISOString();
-
-    challenge.status="COMPLETED";
-
-    saveUploads(uploads);
-    renderUploads();
-    renderChallenges();
-
-    showToast("Winner selected. The winning EDIT is now public.");
-}
-
-function renderChallengeDetail(challenge){
-    const raw=getChallengeRaw(challenge);
-    const entries=getChallengeEntries(challenge);
-
-    const img=document.getElementById("challengeRawImage");
-    const title=document.getElementById("challengeDetailTitle");
-    const description=document.getElementById("challengeDetailDescription");
-    const status=document.getElementById("challengeDetailStatus");
-    const stats=document.getElementById("challengeDetailStats");
-    const entryCount=document.getElementById("challengeEntryCount");
-    const entryGrid=document.getElementById("challengeEntryGrid");
-    const uploadButton=document.getElementById("challengeUploadButton");
-    const backButton=document.getElementById("challengeBackButton");
-
-    if(backButton){
-        backButton.onclick=closeChallenge;
-    }
-
-    if(img){
-        if(raw){
-            img.src=raw.image;
-            img.style.display="block";
-        }else{
-            img.removeAttribute("src");
-            img.style.display="none";
-        }
-    }
-
-    if(title)title.textContent=challenge.title;
-    if(description)description.textContent=challenge.description;
-    const participantNames=new Set(
-        entries.map(x=>String(x.username||x.userId||"Anonymous").toLowerCase())
-    );
-    const participants=participantNames.size;
-    const completed=entries.some(x=>x.challengeWinner===true) || challenge.status==="COMPLETED";
-    const full=participants>=20;
-    if(status){
-        status.textContent=completed
-            ? "CHALLENGE FINISHED"
-            : full
-                ? "CHALLENGE FULL"
-                : challenge.status+" CHALLENGE";
-    }
-
-    if(stats){
-        stats.innerHTML=`
-            <div class="challenge-stat"><small>DEADLINE</small><strong>${escapeHTML(challenge.deadline)}</strong></div>
-            <div class="challenge-stat"><small>PARTICIPANTS</small><strong>${participants}/20</strong></div>
-            <div class="challenge-stat"><small>RAW</small><strong>${raw?"READY":"Upload a RAW"}</strong></div>`;
-    }
-
-    if(entryCount)entryCount.textContent=entries.length+" entr"+(entries.length===1?"y":"ies");
-
-    if(entryGrid){
-        entryGrid.innerHTML=entries.length
-            ? entries.map(item=>challengeEntryCardHTML(item,challenge)).join("")
-            : `<div class="empty-state"><h3>No entries yet</h3><p>Be the first to submit an EDIT.</p></div>`;
-    }
-
-    const inlineUpload=document.getElementById("challengeInlineUpload");
-    const uploadClose=document.getElementById("challengeUploadClose");
-    const fileInput=document.getElementById("challengeFileInput");
-    const publishButton=document.getElementById("challengePublishButton");
-
-    if(uploadButton){
-        if(completed || full){
-            uploadButton.disabled=true;
-            uploadButton.style.opacity=".45";
-            uploadButton.style.cursor="not-allowed";
-            uploadButton.textContent=completed ? "Challenge Finished" : "Challenge Full";
-            const closed=document.createElement("div");
-            closed.className="challenge-closed-message";
-            closed.innerHTML=completed
-                ? "<strong>This challenge is finished.</strong> The winner has been published and entries are closed."
-                : "<strong>This challenge is full.</strong> It has reached 20/20 participants.";
-            uploadButton.parentElement?.appendChild(closed);
-        }else{
-            uploadButton.disabled=false;
-            uploadButton.style.opacity="";
-            uploadButton.style.cursor="";
-            uploadButton.textContent="Upload EDIT to this challenge";
-            uploadButton.onclick=()=>{
-                if(!raw){
-                    showToast("This challenge does not have a RAW source yet.");
-                    return;
-                }
-            if(inlineUpload)inlineUpload.style.display="block";
-            if(uploadButton)uploadButton.style.display="none";
-            document.getElementById("challengeUploadTitle").textContent="Upload EDIT to "+challenge.title;
-            inlineUpload?.scrollIntoView({behavior:"smooth",block:"center"});
-            };
-        }
-    }
-
-    if(uploadClose){
-        uploadClose.onclick=()=>{
-            if(inlineUpload)inlineUpload.style.display="none";
-            if(uploadButton)uploadButton.style.display="inline-flex";
-        };
-    }
-
-    if(fileInput){
-        fileInput.onchange=()=>{
-            const file=fileInput.files && fileInput.files[0];
-            if(!file)return;
-            if(!file.type.startsWith("image/")){
-                showToast("Please choose an image.");
-                fileInput.value="";
-                return;
-            }
-
-            const reader=new FileReader();
-            reader.onload=e=>{
-                document.getElementById("challengePreviewImage").src=e.target.result;
-                document.getElementById("challengePreviewName").textContent=file.name;
-                document.getElementById("challengeUploadEmpty").style.display="none";
-                document.getElementById("challengeUploadPreview").style.display="block";
-            };
-            reader.readAsDataURL(file);
-        };
-    }
-
-    if(publishButton){
-        publishButton.onclick=()=>{
-            const file=fileInput?.files?.[0];
-            const title=document.getElementById("challengePhotoTitle")?.value.trim();
-            const software=document.getElementById("challengePhotoSoftware")?.value.trim();
-            const tags=document.getElementById("challengePhotoTags")?.value.trim();
-
-            if(!file){
-                showToast("Choose your EDIT first.");
-                return;
-            }
-            if(!title){
-                showToast("Give your EDIT a title first.");
-                return;
-            }
-
-            const currentUser=(typeof getCurrentUsername==="function" ? (getCurrentUsername()||"Anonymous") : "Anonymous").toLowerCase();
-            const alreadySubmitted=entries.some(x =>
-                String(x.username||x.userId||"Anonymous").toLowerCase()===currentUser
-            );
-            if(alreadySubmitted){
-                showToast("You have already participated in this challenge.");
-                return;
-            }
-            if(participants>=20){
-                showToast("This challenge is full (20/20).");
-                return;
-            }
-
-            const reader=new FileReader();
-            reader.onload=e=>{
-                const uploads=getUploads();
-
-                uploads.unshift({
-                    id:Date.now().toString(),
-                    type:"edit",
-                    title:title,
-                    category:raw.category || "Landscape",
-                    device:"Not specified",
-                    software:software || "",
-                    tags:tags || "",
-                    image:e.target.result,
-                    createdAt:new Date().toISOString(),
-                    rating:null,
-                    rawId:raw.id,
-                    challengeId:challenge.id,
-                    challengeOnly:true,
-                    challengeWinner:false,
-                    username:(typeof getCurrentUsername==="function" ? (getCurrentUsername()||"Anonymous") : "Anonymous"),
-                    user_id:(window.RAWDIT_CLOUD && window.RAWDIT_CLOUD.user ? window.RAWDIT_CLOUD.user.id : null),
-                    userId:(window.RAWDIT_CLOUD && window.RAWDIT_CLOUD.user ? window.RAWDIT_CLOUD.user.id : null)
-                });
-
-                try{
-                    saveUploads(uploads);
-                }catch(error){
-                    showToast("Storage is full. Try a smaller image.");
-                    return;
-                }
-
-                if(fileInput)fileInput.value="";
-                document.getElementById("challengePhotoTitle").value="";
-                document.getElementById("challengePhotoSoftware").value="";
-                document.getElementById("challengePhotoTags").value="";
-                document.getElementById("challengeUploadEmpty").style.display="block";
-                document.getElementById("challengeUploadPreview").style.display="none";
-
-                if(inlineUpload)inlineUpload.style.display="none";
-                if(uploadButton)uploadButton.style.display="inline-flex";
-
-                renderUploads();
-                renderChallenges();
-                showToast("EDIT submitted to "+challenge.title+".");
-            };
-            reader.readAsDataURL(file);
-        };
-    }
-}
-
-/* Render whenever Challenges is opened. */
-const originalShowPageForChallenges=showPage;
-showPage=function(page){
-    originalShowPageForChallenges(page);
-    if(page==="challenges")renderChallenges();
-};
-
-/* START */
-renderUploads();
-populateRawDropdown();
-loadReviewCandidate();
-
-
 /* STEP 6 — USERNAME SYSTEM */
 const USERNAME_KEY="rawdit_username_v1";
 const USERNAMES_KEY="rawdit_taken_usernames_v1";
@@ -5108,7 +4038,7 @@ document.addEventListener("click",function(e){
     <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
         <small>RAWDIT ADMIN</small>
         <h3 id="adminTitle">Admin access</h3>
-        <p>Admin access is required to change challenge settings and covers.</p>
+        <p>Admin access is required for RAWDIT administration.</p>
         <input
             id="adminPassword"
             class="admin-password"
@@ -5371,7 +4301,6 @@ document.addEventListener("click",function(e){
             localSaveUploads(items);
 
             if(typeof renderUploads === "function") renderUploads();
-            if(typeof renderChallenges === "function") renderChallenges();
             if(typeof loadReviewCandidate === "function") loadReviewCandidate();
         }
     }
@@ -5452,7 +4381,6 @@ document.addEventListener("click",function(e){
         cloudLoadedUploads = true;
 
         if(typeof renderUploads === "function") renderUploads();
-        if(typeof renderChallenges === "function") renderChallenges();
         if(typeof loadReviewCandidate === "function") loadReviewCandidate();
 
         await syncAllUploads();
@@ -5585,115 +4513,6 @@ document.addEventListener("click",function(e){
     }
 
 
-    async function loadCloudChallengeCovers(){
-        if(!cloudClient) return;
-
-        const { data, error } = await cloudClient
-            .from("rawdit_challenge_covers")
-            .select("challenge_id,image_url")
-            .order("updated_at", { ascending:false });
-
-        if(error){
-            console.warn("RAWDIT challenge covers could not be loaded:", error);
-            return;
-        }
-
-        (data || []).forEach(row=>{
-            try{
-                const storedUrl = String(row.image_url || "");
-                const freshUrl = storedUrl.includes("?")
-                    ? storedUrl
-                    : storedUrl + "?v=" + Date.now();
-
-                localStorage.setItem(
-                    "rawdit_challenge_cover_" + row.challenge_id,
-                    freshUrl
-                );
-            }catch(e){}
-        });
-
-        if(typeof renderChallenges === "function"){
-            renderChallenges();
-        }
-    }
-
-    async function syncChallengeCover(challengeId, file){
-        if(!cloudReady || !cloudClient || !cloudUser || !file) return;
-
-        try{
-            const blob = file;
-            const ext = extensionFromMime(blob.type);
-            const path =
-                cloudUser.id + "/challenge-covers/" +
-                String(challengeId) + "." + ext;
-
-            const { error: uploadError } = await cloudClient.storage
-                .from(RAWDIT_BUCKET)
-                .upload(path, blob, {
-                    contentType: blob.type || "image/jpeg",
-                    upsert: true,
-                    cacheControl: "31536000"
-                });
-
-            if(uploadError) throw uploadError;
-
-            const { data } = cloudClient.storage
-                .from(RAWDIT_BUCKET)
-                .getPublicUrl(path);
-
-            if(!data || !data.publicUrl) throw new Error("Could not create public cover URL.");
-
-            /*
-             * Supabase/CDN can cache the same public URL after the file is
-             * overwritten. Add a version query so the new cover is fetched
-             * immediately instead of showing the old image.
-             */
-            const freshUrl = data.publicUrl + "?v=" + Date.now();
-
-            const { error } = await cloudClient
-                .from("rawdit_challenge_covers")
-                .upsert({
-                    challenge_id: String(challengeId),
-                    image_url: freshUrl,
-                    storage_path: path,
-                    updated_by: cloudUser.id,
-                    updated_at: new Date().toISOString()
-                }, { onConflict:"challenge_id" });
-
-            if(error) throw error;
-
-            localStorage.setItem(
-                "rawdit_challenge_cover_" + challengeId,
-                freshUrl
-            );
-
-            if(typeof renderChallenges === "function"){
-                renderChallenges();
-            }
-
-            toast("Challenge cover updated for everyone.");
-        }catch(error){
-            console.error("RAWDIT challenge cover sync failed:", error);
-            toast("Cover saved locally, but cloud sync failed.");
-        }
-    }
-
-    function bindChallengeCoverCloudSync(){
-        if(typeof window.handleChallengeCoverChange !== "function") return;
-
-        const original = window.handleChallengeCoverChange;
-        window.handleChallengeCoverChange = function(challengeId, input){
-            const file = input && input.files && input.files[0];
-
-            /* Keep the existing local behavior. */
-            original(challengeId, input);
-
-            if(file && file.type && file.type.startsWith("image/")){
-                syncChallengeCover(challengeId, file);
-            }
-        };
-    }
-
     async function initCloud(){
         if(cloudInitializing || cloudReady) return;
         cloudInitializing = true;
@@ -5736,8 +4555,6 @@ document.addEventListener("click",function(e){
             }
 
             await loadCloudUploads();
-            await loadCloudChallengeCovers();
-            bindChallengeCoverCloudSync();
 
             /* Pull any existing local username into the cloud. */
             const localName = getCurrentUsername();
@@ -5844,34 +4661,11 @@ document.addEventListener("click",function(e){
       </a>`;
   }
 
-  function homeChallenge(challenge){
-    const entries=typeof getChallengeEntries==="function"
-      ? (getChallengeEntries(challenge)||[]) : [];
-    const names=new Set(entries.map(x=>String(x.username||x.userId||"").toLowerCase()).filter(Boolean));
-    const finished=challenge.status==="COMPLETED" || entries.some(x=>x.challengeWinner===true);
-    const cover=typeof getChallengeCover==="function" ? getChallengeCover(challenge) : (challenge.coverUrl||challenge.cover||"");
-    return `
-      <article class="home-challenge">
-        <div class="home-challenge-cover">${cover ? `<img src="${homeEsc(cover)}" alt="">` : ""}</div>
-        <div class="home-challenge-body">
-          <div class="home-challenge-label">${finished ? "Finished" : "Active challenge"}</div>
-          <div class="home-challenge-title">${homeEsc(challenge.title||"RAWDIT Challenge")}</div>
-          <div class="home-challenge-meta">
-            <span><strong>${names.size}/20</strong> participants</span>
-            <span>${homeEsc(challenge.deadline||"Open")}</span>
-          </div>
-          <a class="home-challenge-button" href="javascript:void(0)" onclick="openChallenge('${homeEsc(challenge.id||"")}')">
-            ${finished ? "View Challenge" : "Join Challenge"}
-          </a>
-        </div>
-      </article>`;
-  }
-
   function renderHomeCommunity(){
     const host=document.getElementById("homeCommunitySections");
     if(!host) return;
 
-    const uploads=homeUploads().filter(x=>x && !x.challengeOnly);
+    const uploads=homeUploads();
     const raws=uploads.filter(x=>!homeIsEdit(x));
     const edits=uploads.filter(x=>homeIsEdit(x));
 
@@ -5880,7 +4674,6 @@ document.addEventListener("click",function(e){
     const topEdits=[...edits].sort((a,b)=>score(b)-score(a));
     const topRaws=[...raws].sort((a,b)=>score(b)-score(a));
 
-    const challenges=(typeof RAWDIT_CHALLENGES!=="undefined" ? RAWDIT_CHALLENGES : []).slice(0,4);
 
     host.innerHTML=`
       <section class="home-section">
@@ -5967,7 +4760,7 @@ document.addEventListener("click",function(e){
     const grid=document.getElementById("topRatedRealGrid");
     if(!grid)return;
 
-    const uploads=topRatedUploads().filter(x=>x && !x.challengeOnly);
+    const uploads=topRatedUploads();
 
     // Use the actual community rating already stored on each upload.
     // Only rated items are eligible for this section.
@@ -6182,7 +4975,6 @@ document.addEventListener("click",function(e){
       if(typeof saveUploads==="function") saveUploads(next);
 
       if(typeof renderUploads==="function") renderUploads();
-      if(typeof renderChallenges==="function") renderChallenges();
       if(typeof renderHomeCommunity==="function") renderHomeCommunity();
       if(typeof renderTopRated==="function") renderTopRated();
 
@@ -6494,7 +5286,6 @@ Run the one-time SQL supplied with this version before testing admin deletion.
     }
 
     /* The mobile A/profile button is the combined Admin entry point.
-       Unlock the same admin-mode used by challenge cover controls. */
     document.body.classList.add("admin-mode");
 
     const adminButton=document.getElementById("adminNavButton");
