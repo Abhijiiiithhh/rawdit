@@ -868,6 +868,21 @@ header nav #userProfileName{display:none !important}
 .challenge-entry-body{padding:11px}
 .challenge-entry-body h4{margin:0 0 4px;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .challenge-entry-user{font-size:7px;color:#666}
+.challenge-delete-entry{
+    border:1px solid #4a2a2a;
+    background:#151010;
+    color:#d88;
+    border-radius:18px;
+    padding:7px 10px;
+    font-size:7px;
+    cursor:pointer;
+}
+body.admin-mode .challenge-delete-entry:hover{
+    background:#fff;
+    color:#000;
+    border-color:#fff;
+}
+
 .challenge-entry-actions{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-top:10px}
 .challenge-view-entry,.challenge-pick-winner{
     border:1px solid #333;background:#151515;color:#aaa;border-radius:18px;
@@ -4455,9 +4470,34 @@ function challengeEntryCardHTML(item,challenge){
                     : `<button type="button" class="challenge-pick-winner admin-only-control"
                         onclick="pickChallengeWinner('${challenge.id}','${item.id}')">Pick Winner</button>`
                 }
+                <button type="button"
+                    class="challenge-delete-entry admin-only-control"
+                    onclick="event.stopPropagation();deleteChallengeEntry('${item.id}')">
+                    Delete
+                </button>
             </div>
         </div>
     </article>`;
+}
+
+function deleteChallengeEntry(entryId){
+    if(!document.body.classList.contains("admin-mode")){
+        showToast("Admin access required.");
+        return;
+    }
+
+    const item=getUploads().find(x=>String(x.id)===String(entryId));
+    if(!item){
+        showToast("Challenge photo not found.");
+        return;
+    }
+
+    if(String(item.type).toLowerCase()!=="edit" || !item.challengeId){
+        showToast("This is not a challenge photo.");
+        return;
+    }
+
+    deleteUpload(entryId);
 }
 
 function viewChallengeEntry(id){
