@@ -935,7 +935,7 @@ header nav #userProfileName{display:none !important}
 }
 
 
-/* ADMIN MODE — challenge cover editing is visible only to admin */
+/* ADMIN MODE */
 .challenge-cover-button,
 .challenge-cover-input{display:none !important}
 body.admin-mode .challenge-cover-button{display:block !important}
@@ -1489,7 +1489,7 @@ body.admin-mode .admin-only-control{display:inline-flex !important}
     background:transparent !important;
   }
 
-  /* Admin has no separate mobile button — profile opens admin dashboard/login. */
+  /* Mobile: the A/profile button is the combined Admin dashboard/login entry. */
   header nav .admin-nav-button{
     display:none !important;
   }
@@ -4283,7 +4283,6 @@ function getChallengeCover(challenge){
 }
 
 function changeChallengeCover(challengeId){
-    /* Only unlocked admin mode can open the cover-photo picker. */
     if(!document.body.classList.contains("admin-mode")){
         showToast("Admin access required.");
         return;
@@ -4293,7 +4292,6 @@ function changeChallengeCover(challengeId){
 }
 
 function handleChallengeCoverChange(challengeId,input){
-    /* Defense-in-depth: changing a challenge cover is admin-only. */
     if(!document.body.classList.contains("admin-mode")){
         if(input)input.value="";
         showToast("Admin access required.");
@@ -5631,12 +5629,6 @@ document.addEventListener("click",function(e){
 
         const original = window.handleChallengeCoverChange;
         window.handleChallengeCoverChange = function(challengeId, input){
-            if(!document.body.classList.contains("admin-mode")){
-                if(input)input.value="";
-                if(typeof toast === "function") toast("Admin access required.");
-                return;
-            }
-
             const file = input && input.files && input.files[0];
 
             /* Keep the existing local behavior. */
@@ -6432,9 +6424,31 @@ Run the one-time SQL supplied with this version before testing admin deletion.
   async function openAdminDashboard(){
     if(!isAdmin()){
       const password=prompt("RAWDIT Admin password:");
-      if(password!==ADMIN_DASH_PASSWORD){ if(password!==null) alert("Incorrect admin password."); return; }
-      try{sessionStorage.setItem("rawdit_admin_authenticated","1");}catch(e){}
+      if(password!==ADMIN_DASH_PASSWORD){
+        if(password!==null) alert("Incorrect admin password.");
+        return;
+      }
+      try{
+        sessionStorage.setItem("rawdit_admin_authenticated","1");
+        sessionStorage.setItem("rawdit_admin_session_v1","1");
+      }catch(e){}
+    }else{
+      try{
+        sessionStorage.setItem("rawdit_admin_authenticated","1");
+        sessionStorage.setItem("rawdit_admin_session_v1","1");
+      }catch(e){}
     }
+
+    /* The mobile A/profile button is the combined Admin entry point.
+       Unlock the same admin-mode used by challenge cover controls. */
+    document.body.classList.add("admin-mode");
+
+    const adminButton=document.getElementById("adminNavButton");
+    if(adminButton){
+      adminButton.textContent="Admin ✓";
+      adminButton.classList.add("logged-in");
+    }
+
     showPage("adminDashboard");
     await loadAdminDashboard();
   }
