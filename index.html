@@ -709,6 +709,66 @@ header nav #userProfileName{display:none !important}
 #nextReviewButton:disabled{opacity:.45 !important;cursor:not-allowed !important}
 
 
+
+/* PROFILE CHOOSER + USER PROFILE */
+.profile-choice-overlay{
+    position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;
+    padding:20px;background:rgba(0,0,0,.82);backdrop-filter:blur(14px);
+}
+.profile-choice-overlay.show{display:flex}
+.profile-choice-card{
+    width:min(430px,100%);padding:28px;background:#111;border:1px solid #303030;
+    border-radius:16px;box-shadow:0 25px 80px rgba(0,0,0,.65)
+}
+.profile-choice-card small{color:#666;font-size:7px;letter-spacing:3px}
+.profile-choice-card h2{margin-top:10px;font-size:27px;letter-spacing:-1px}
+.profile-choice-card p{margin-top:7px;color:#777;font-size:9px;line-height:1.6}
+.profile-choice-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:22px}
+.profile-choice-actions button{
+    min-height:58px;padding:12px;border:1px solid #292929;border-radius:10px;background:#151515;color:#aaa;
+    font-size:9px;text-align:left
+}
+.profile-choice-actions button:hover{background:#fff;color:#000;border-color:#fff}
+.profile-choice-actions strong{display:block;font-size:11px;color:inherit}
+.profile-choice-actions span{display:block;margin-top:5px;font-size:7px;opacity:.65}
+.profile-choice-close{
+    width:100%;margin-top:10px;padding:9px;border:0;background:transparent;color:#666;font-size:8px
+}
+.profile-choice-close:hover{color:#fff}
+
+.user-profile-page{max-width:900px;margin:auto;padding:65px 4% 80px}
+.user-profile-head{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.user-profile-identity{display:flex;align-items:center;gap:15px}
+.user-profile-big-avatar{
+    width:58px;height:58px;display:flex;align-items:center;justify-content:center;
+    border:1px solid #3a3a3a;border-radius:50%;background:#171717;color:#fff;font-size:18px;font-weight:700
+}
+.user-profile-kicker{color:#666;font-size:7px;letter-spacing:3px}
+.user-profile-head h1{margin-top:7px;font-size:32px;letter-spacing:-1.5px}
+.user-profile-head p{margin-top:5px;color:#666;font-size:9px}
+.user-profile-back{
+    padding:9px 13px;border:1px solid #292929;border-radius:20px;background:#101010;color:#777;font-size:8px
+}
+.user-profile-back:hover{background:#fff;color:#000;border-color:#fff}
+.user-profile-stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:30px
+}
+.user-profile-stat{
+    padding:20px;background:#101010;border:1px solid #242424;border-radius:12px
+}
+.user-profile-stat span{display:block;color:#666;font-size:7px;letter-spacing:1.2px}
+.user-profile-stat strong{display:block;margin-top:8px;font-size:27px;letter-spacing:-.8px}
+.user-profile-note{
+    margin-top:15px;padding:13px 15px;border:1px solid #222;background:#101010;border-radius:10px;color:#666;font-size:8px;line-height:1.6
+}
+@media(max-width:600px){
+    .profile-choice-actions{grid-template-columns:1fr}
+    .user-profile-page{padding:48px 17px 70px}
+    .user-profile-head{align-items:flex-start}
+    .user-profile-stats{grid-template-columns:1fr 1fr}
+    .user-profile-head h1{font-size:27px}
+}
+
 /* CHALLENGES */
 .challenge-section{max-width:1180px;margin:0 auto;padding:30px 24px 80px}
 .challenge-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:24px}
@@ -2337,6 +2397,55 @@ RAWDIT
 </div>
 </main>
 
+
+
+<!-- PROFILE CHOOSER -->
+<div class="profile-choice-overlay" id="profileChoiceOverlay" role="dialog" aria-modal="true">
+  <div class="profile-choice-card">
+    <small>RAWDIT PROFILE</small>
+    <h2>Continue as</h2>
+    <p>Choose how you want to enter from this profile button.</p>
+    <div class="profile-choice-actions">
+      <button type="button" onclick="openUserProfile()">
+        <strong>USER</strong>
+        <span>View your RAWDIT profile</span>
+      </button>
+      <button type="button" onclick="openAdminFromProfile()">
+        <strong>ADMIN</strong>
+        <span>Open the admin dashboard</span>
+      </button>
+    </div>
+    <button type="button" class="profile-choice-close" onclick="closeProfileChoice()">Cancel</button>
+  </div>
+</div>
+
+<!-- USER PROFILE -->
+<main id="userProfilePage" class="page">
+  <section class="user-profile-page">
+    <div class="user-profile-head">
+      <div class="user-profile-identity">
+        <div class="user-profile-big-avatar" id="profileBigAvatar">U</div>
+        <div>
+          <div class="user-profile-kicker">RAWDIT USER</div>
+          <h1 id="profileUsername">@username</h1>
+          <p>Your RAWDIT activity</p>
+        </div>
+      </div>
+      <button type="button" class="user-profile-back" onclick="showPage('home')">← Back</button>
+    </div>
+
+    <div class="user-profile-stats">
+      <div class="user-profile-stat"><span>PHOTOS UPLOADED</span><strong id="profileTotalPhotos">—</strong></div>
+      <div class="user-profile-stat"><span>RAWs</span><strong id="profileRawCount">—</strong></div>
+      <div class="user-profile-stat"><span>EDITs</span><strong id="profileEditCount">—</strong></div>
+      <div class="user-profile-stat"><span>CHALLENGES WON</span><strong id="profileChallengeWins">—</strong></div>
+    </div>
+
+    <div class="user-profile-note" id="profileLoadingNote">
+      Loading your RAWDIT activity…
+    </div>
+  </section>
+</main>
 
 <!-- ADMIN DASHBOARD -->
 <main id="adminDashboard" class="page">
@@ -6458,7 +6567,131 @@ Run the one-time SQL supplied with this version before testing admin deletion.
     }
 
     if(document.readyState==="loading"){
-        document.addEventListener("DOMContentLoaded",function(){
+      
+  function openProfileChoice(){
+    const overlay=document.getElementById("profileChoiceOverlay");
+    if(overlay) overlay.classList.add("show");
+  }
+  window.openProfileChoice=openProfileChoice;
+
+  function closeProfileChoice(){
+    const overlay=document.getElementById("profileChoiceOverlay");
+    if(overlay) overlay.classList.remove("show");
+  }
+  window.closeProfileChoice=closeProfileChoice;
+
+  async function openAdminFromProfile(){
+    closeProfileChoice();
+    await openAdminDashboard();
+  }
+  window.openAdminFromProfile=openAdminFromProfile;
+
+  async function openUserProfile(){
+    closeProfileChoice();
+
+    const name=String(
+      (typeof getCurrentUsername==="function" ? getCurrentUsername() : "") ||
+      localStorage.getItem("rawdit_username_v1") || ""
+    ).trim();
+
+    if(!name){
+      const gate=document.getElementById("usernameGate");
+      if(gate) gate.classList.add("show");
+      showToast("Set your username first.");
+      return;
+    }
+
+    const profileName=document.getElementById("profileUsername");
+    const avatar=document.getElementById("profileBigAvatar");
+    if(profileName) profileName.textContent="@"+name;
+    if(avatar) avatar.textContent=name.charAt(0).toUpperCase();
+
+    setProfileStats("—","—","—","—","Loading your RAWDIT activity…");
+    showPage("userProfilePage");
+
+    await loadUserProfileStats(name);
+  }
+  window.openUserProfile=openUserProfile;
+
+  function setProfileStats(total,raw,edit,wins,note){
+    const ids=[
+      ["profileTotalPhotos",total],
+      ["profileRawCount",raw],
+      ["profileEditCount",edit],
+      ["profileChallengeWins",wins]
+    ];
+    ids.forEach(([id,value])=>{
+      const el=document.getElementById(id);
+      if(el) el.textContent=String(value);
+    });
+    const n=document.getElementById("profileLoadingNote");
+    if(n) n.textContent=note || "";
+  }
+
+  async function loadUserProfileStats(username){
+    const cloud=window.RAWDIT_CLOUD || {};
+    const client=cloud.client;
+    const user=cloud.user;
+
+    /* Prefer the real Supabase user id so stats cannot be mixed with
+       another user who happens to have the same display name. */
+    if(client && user){
+      try{
+        const {data,error}=await client
+          .from("rawdit_uploads")
+          .select("type,challenge_winner")
+          .eq("user_id",user.id);
+
+        if(error) throw error;
+
+        const rows=data || [];
+        let raw=0,edit=0,wins=0;
+        rows.forEach(row=>{
+          if(String(row.type||"").toLowerCase()==="edit") edit++;
+          else raw++;
+          if(row.challenge_winner===true) wins++;
+        });
+
+        setProfileStats(
+          rows.length,
+          raw,
+          edit,
+          wins,
+          "Your activity from RAWDIT."
+        );
+        return;
+      }catch(error){
+        console.warn("RAWDIT user profile stats failed:",error);
+      }
+    }
+
+    /* Fallback for local/offline records. */
+    try{
+      const rows=(typeof getUploads==="function" ? getUploads() : [])
+        .filter(item=>String(item.username||"").toLowerCase()===username.toLowerCase());
+
+      let raw=0,edit=0,wins=0;
+      rows.forEach(item=>{
+        if(String(item.type||"").toLowerCase()==="edit") edit++;
+        else raw++;
+        if(item.challengeWinner===true) wins++;
+      });
+
+      setProfileStats(
+        rows.length,
+        raw,
+        edit,
+        wins,
+        "Showing activity stored on this device."
+      );
+    }catch(error){
+      console.warn("RAWDIT local profile stats failed:",error);
+      setProfileStats(0,0,0,0,"Could not load profile activity.");
+    }
+  }
+  window.loadUserProfileStats=loadUserProfileStats;
+
+  document.addEventListener("DOMContentLoaded",function(){
             setTimeout(installUsernameHandler,1000);
         });
     }else{
@@ -6569,8 +6802,14 @@ Run the one-time SQL supplied with this version before testing admin deletion.
   document.addEventListener("DOMContentLoaded",function(){
     const avatar=document.getElementById("userAvatar");
     if(avatar){
-      avatar.onclick=function(){openAdminDashboard();};
-      avatar.title="RAWDIT Admin Dashboard";
+      avatar.onclick=function(){openProfileChoice();};
+      avatar.title="RAWDIT Profile";
+    }
+
+    const adminNav=document.getElementById("adminNavButton");
+    if(adminNav){
+      adminNav.onclick=function(){openProfileChoice();};
+      adminNav.title="RAWDIT Profile";
     }
     const refresh=document.getElementById("adminRefreshUsers");
     if(refresh)refresh.onclick=loadAdminDashboard;
