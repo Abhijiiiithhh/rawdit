@@ -368,7 +368,41 @@ footer{padding:46px 4%;border-top:1px solid #1c1c1c;display:grid;grid-template-c
 .photo-detail-top{grid-template-columns:1fr;max-width:460px;margin:auto}.detail-score-grid{grid-template-columns:1fr 1fr}.edit-list{grid-template-columns:repeat(2,1fr)}
 .upload-workspace{grid-template-columns:1fr}.preview{margin-top:0}.upload-form{margin-top:0}
 @media(max-width:800px){
-header{padding:0 18px}nav{gap:8px}nav button{display:none}nav .nav-upload{display:block}
+header{
+    min-height:72px;
+    height:auto;
+    padding:10px 14px 0;
+    flex-wrap:wrap;
+    align-items:center;
+}
+.logo{flex:0 0 auto}
+header nav{
+    order:3;
+    width:100%;
+    min-width:0;
+    display:flex !important;
+    align-items:center;
+    justify-content:flex-start;
+    gap:10px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:8px 2px 10px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+}
+header nav::-webkit-scrollbar{display:none}
+header nav button,
+header nav .nav-upload,
+header nav .admin-nav-button{
+    display:block !important;
+    flex:0 0 auto;
+    white-space:nowrap;
+    font-size:9px !important;
+}
+header nav .nav-upload{padding:8px 14px}
+header nav .admin-nav-button{padding:7px 10px !important}
+header nav #userProfile{display:flex !important;flex:0 0 auto;margin-left:2px}
+header nav #userProfileName{display:none !important}
 .photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.comparison-slider{width:min(100%,390px)}
 .analysis-grid{grid-template-columns:1fr}.review-box{grid-template-columns:1fr}.explore-tools{flex-direction:column;align-items:stretch}.search{width:100%}
 .leaderboard{grid-template-columns:1fr}.upload-types{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}
@@ -5294,8 +5328,20 @@ document.addEventListener("click",function(e){
                 return;
             }
 
+            /*
+             * Do not make the first username click depend on Supabase finishing
+             * anonymous authentication. On slower phones/networks cloudReady can
+             * still be false even though the page is usable.
+             *
+             * Save locally and close the gate immediately. initCloud() will sync
+             * this username to Supabase as soon as the cloud session is ready.
+             */
             if(!cloudReady){
-                if(error) error.textContent = "Connecting to RAWDIT. Try again in a moment.";
+                localStorage.setItem("rawdit_username_v1", name);
+                updateUsernameHeader();
+                hideUsernameGate();
+                if(error) error.textContent = "";
+                toast("Welcome to RAWDIT, @" + name);
                 return;
             }
 
@@ -5478,6 +5524,16 @@ document.addEventListener("click",function(e){
                     await saveUsernameCloud(localName);
                 }catch(e){
                     console.warn("RAWDIT username sync failed:", e);
+
+                    /* If another account already owns this username, do not
+                       leave the user stuck with a name that could not be synced. */
+                    const message = String(e && e.message || "").toLowerCase();
+                    if(message.includes("taken")){
+                        localStorage.removeItem("rawdit_username_v1");
+                        updateUsernameHeader();
+                        showUsernameGate();
+                        toast("That username is already taken.");
+                    }
                 }
             }
 
@@ -6053,6 +6109,133 @@ Run the one-time SQL supplied with this version before testing admin deletion.
     if(e.key==="Escape") close(false);
     if(e.key==="Enter" && document.activeElement===confirmBtn) close(true);
   });
+})();
+</script>
+
+
+
+<script>
+/*
+ * RAWDIT MOBILE + USERNAME FINAL FIX
+ * - Keeps every navigation item accessible on mobile.
+ * - Makes the first username submission immediately enter the site.
+ * - Cloud sync still happens in the background when Supabase is ready.
+ */
+(function(){
+    function installUsernameHandler(){
+        const button=document.getElementById("usernameContinue");
+        const input=document.getElementById("usernameInput");
+        const error=document.getElementById("usernameError");
+        if(!button || !input) return;
+
+        button.onclick=async function(ev){
+            ev.preventDefault();
+            ev.stopPropagation();
+
+            const name=String(input.value||"").trim();
+
+            if(!/^[A-Za-z0-9_-]{3,20}$/.test(name)){
+                if(error) error.textContent="Use 3–20 letters, numbers, _ or -.";
+                input.focus();
+                return;
+            }
+
+            if(name.toLowerCase().includes("rawdit")){
+                if(error) error.textContent='Username cannot contain "rawdit".';
+                input.focus();
+                return;
+            }
+
+            button.disabled=true;
+            button.textContent="Continue…";
+            if(error) error.textContent="";
+
+            try{
+                const cloud=window.RAWDIT_CLOUD||{};
+                const client=cloud.client;
+                const user=cloud.user;
+
+                if(client && user){
+                    const lower=name.toLowerCase();
+                    const check=await client
+                        .from("rawdit_users")
+                        .select("id,username")
+                        .eq("username_lower",lower)
+                        .maybeSingle();
+
+                    if(check.error) throw check.error;
+
+                    if(check.data && String(check.data.id)!==String(user.id)){
+                        throw new Error("That username is already taken.");
+                    }
+
+                    const save=await client
+                        .from("rawdit_users")
+                        .upsert({
+                            id:user.id,
+                            username:name,
+                            username_lower:lower,
+                            updated_at:new Date().toISOString()
+                        },{onConflict:"id"});
+
+                    if(save.error) throw save.error;
+                }
+
+                localStorage.setItem("rawdit_username_v1",name);
+
+                const takenKey="rawdit_taken_usernames_v1";
+                try{
+                    const taken=JSON.parse(localStorage.getItem(takenKey)||"[]");
+                    if(!taken.some(x=>String(x).toLowerCase()===name.toLowerCase())){
+                        taken.push(name);
+                        localStorage.setItem(takenKey,JSON.stringify(taken));
+                    }
+                }catch(_){}
+
+                if(typeof updateUsernameHeader==="function") updateUsernameHeader();
+                if(typeof hideUsernameGate==="function") hideUsernameGate();
+
+                if(typeof showToast==="function"){
+                    showToast("Welcome to RAWDIT, @"+name);
+                }
+
+                /*
+                 * Explicitly ensure the user is on the main RAWDIT page after
+                 * the first successful username submission.
+                 */
+                if(typeof showPage==="function"){
+                    const active=document.querySelector(".page.active");
+                    if(!active) showPage("home");
+                }
+            }catch(e){
+                console.error("RAWDIT username submit failed:",e);
+                if(error){
+                    const msg=String(e && e.message || "").toLowerCase();
+                    error.textContent=msg.includes("taken")
+                        ?"That username is already taken."
+                        :"Could not save username. Please try again.";
+                }
+            }finally{
+                button.disabled=false;
+                button.textContent="Continue →";
+            }
+        };
+
+        input.onkeydown=function(ev){
+            if(ev.key==="Enter"){
+                ev.preventDefault();
+                button.click();
+            }
+        };
+    }
+
+    if(document.readyState==="loading"){
+        document.addEventListener("DOMContentLoaded",function(){
+            setTimeout(installUsernameHandler,1000);
+        });
+    }else{
+        setTimeout(installUsernameHandler,1000);
+    }
 })();
 </script>
 
