@@ -411,7 +411,7 @@ header nav #userProfileName{display:none !important}
 @media(max-width:520px){
 .rating-photo-card{max-width:320px}
 .section,.signature-section,.library-section,.challenge-section,.review-wrap,.upload-container,.raw-detail{padding-left:17px;padding-right:17px}
-.photo-grid{grid-template-columns:1fr}.small-grid{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}
+.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.small-grid{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}
 .hero h1{font-size:52px;letter-spacing:-3.5px}.hero-buttons{flex-direction:column}.btn{width:220px}
 .page-hero{padding:62px 17px 40px}.upload-title h1{font-size:35px}.comparison-slider{width:min(100%,360px);border-radius:13px}
 .signature-heading{align-items:flex-start;flex-direction:column;gap:4px}.linked-edits{grid-template-columns:1fr 1fr}footer{grid-template-columns:1fr}
@@ -1658,23 +1658,7 @@ RAWDIT
 </div>
 </section>
 
-<section class="signature-section">
-<div class="signature-heading">
-<div><h2>RAW → EDIT</h2><p>One image. Two versions. Drag to compare.</p></div>
-<div class="view-all">RAWDIT Signature</div>
-</div>
-<div class="comparison-wrap">
-<div class="comparison-slider">
-<div class="comparison-raw"><div class="fake-photo"></div><span>RAW PHOTO</span></div>
-<div class="comparison-edit" id="comparisonEdit"><div class="fake-photo"></div><span>EDITED PHOTO</span></div>
-<div class="comparison-label raw-label">RAW</div>
-<div class="comparison-label edit-label">EDIT</div>
-<div class="slider-handle" id="sliderHandle"></div>
-<input id="comparisonRange" type="range" min="0" max="100" value="50">
-</div>
-<div class="slider-instruction">DRAG ◀ THE SLIDER ▶ TO REVEAL RAW / EDIT</div>
-</div>
-</section>
+
 
 <div id="homeCommunitySections"></div>
 
@@ -2290,19 +2274,6 @@ function showPage(page){
     const map={raw:"navRaw",edit:"navEdit",review:"navReview",explore:"navExplore",challenges:"navChallenges"};
     if(map[page]) document.getElementById(map[page]).classList.add("active");
 }
-
-
-/* COMPARISON */
-const range=document.getElementById("comparisonRange");
-const editLayer=document.getElementById("comparisonEdit");
-const handle=document.getElementById("sliderHandle");
-
-function updateComparison(value){
-    editLayer.style.width=value+"%";
-    handle.style.left=value+"%";
-}
-range.addEventListener("input",e=>updateComparison(e.target.value));
-updateComparison(50);
 
 
 /* STORAGE */
