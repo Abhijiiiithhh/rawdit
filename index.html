@@ -5600,9 +5600,14 @@ document.addEventListener("click",function(e){
 
         (data || []).forEach(row=>{
             try{
+                const storedUrl = String(row.image_url || "");
+                const freshUrl = storedUrl.includes("?")
+                    ? storedUrl
+                    : storedUrl + "?v=" + Date.now();
+
                 localStorage.setItem(
                     "rawdit_challenge_cover_" + row.challenge_id,
-                    row.image_url
+                    freshUrl
                 );
             }catch(e){}
         });
@@ -5636,11 +5641,20 @@ document.addEventListener("click",function(e){
                 .from(RAWDIT_BUCKET)
                 .getPublicUrl(path);
 
+            if(!data || !data.publicUrl) throw new Error("Could not create public cover URL.");
+
+            /*
+             * Supabase/CDN can cache the same public URL after the file is
+             * overwritten. Add a version query so the new cover is fetched
+             * immediately instead of showing the old image.
+             */
+            const freshUrl = data.publicUrl + "?v=" + Date.now();
+
             const { error } = await cloudClient
                 .from("rawdit_challenge_covers")
                 .upsert({
                     challenge_id: String(challengeId),
-                    image_url: data.publicUrl,
+                    image_url: freshUrl,
                     storage_path: path,
                     updated_by: cloudUser.id,
                     updated_at: new Date().toISOString()
@@ -5650,7 +5664,7 @@ document.addEventListener("click",function(e){
 
             localStorage.setItem(
                 "rawdit_challenge_cover_" + challengeId,
-                data.publicUrl
+                freshUrl
             );
 
             if(typeof renderChallenges === "function"){
