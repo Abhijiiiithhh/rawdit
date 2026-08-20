@@ -3167,6 +3167,57 @@ function setupDetailComparison(){
     box.onpointercancel=()=>dragging=false;
 }
 
+function startEditFromRaw(rawId){
+    const uploads=getUploads();
+    const raw=uploads.find(item=>String(item.id)===String(rawId) && item.type==="raw");
+
+    if(!raw){
+        showToast("RAW not found.");
+        return;
+    }
+
+    /* Start from a clean upload form, then switch to EDIT mode. */
+    try{
+        if(typeof resetUploadForm==="function") resetUploadForm();
+    }catch(e){}
+
+    showPage("upload");
+
+    if(typeof selectUploadType==="function"){
+        selectUploadType("edit");
+    }
+
+    /* Populate the RAW picker and select the exact RAW that was opened. */
+    if(typeof populateRawDropdown==="function"){
+        populateRawDropdown();
+    }
+
+    const rawSelect=document.getElementById("rawLinkSelect");
+    if(rawSelect){
+        rawSelect.value=String(raw.id);
+    }
+
+    const picker=document.getElementById("rawPicker");
+    const option=picker
+        ? Array.from(picker.querySelectorAll(".raw-picker-option"))
+            .find(btn=>String(btn.dataset.value)===String(raw.id))
+        : null;
+
+    if(option){
+        option.click();
+    }else{
+        /* Keep the exact RAW linked even if the visual picker has not rendered. */
+        const deviceInput=document.getElementById("photoDevice");
+        if(deviceInput){
+            deviceInput.value=raw.device || "Not specified";
+            deviceInput.dataset.inheritedFromRaw=String(raw.id);
+            deviceInput.classList.add("inherited-device");
+        }
+    }
+
+    showToast("Ready to edit: " + (raw.title || "RAW"));
+}
+
 function openPhotoDetail(photoId){
     const uploads=getUploads();
     const photo=uploads.find(item=>item.id===photoId);
@@ -3252,11 +3303,17 @@ function openPhotoDetail(photoId){
     }
 
     const reviewButton=document.getElementById("detailReviewButton");
-    reviewButton.onclick=()=>{
-        showPage("review");
-        currentReviewPhoto=photo;
-        loadReviewCandidate();
-    };
+    if(photo.type==="raw"){
+        reviewButton.textContent="Edit this photo";
+        reviewButton.onclick=()=>rawditConfirmRawDownload(photo);
+    }else{
+        reviewButton.textContent="Review this photo";
+        reviewButton.onclick=()=>{
+            showPage("review");
+            currentReviewPhoto=photo;
+            loadReviewCandidate();
+        };
+    }
 
     document.getElementById("detailBackButton").onclick=()=>showPage(
         photo.type==="raw" ? "raw" : "edit"
@@ -6840,6 +6897,134 @@ Run the one-time SQL supplied with this version before testing admin deletion.
     }
     const refresh=document.getElementById("adminRefreshUsers");
     if(refresh)refresh.onclick=loadAdminDashboard;
+  });
+})();
+</script>
+
+
+<div class="raw-download-modal" id="rawDownloadModal" aria-hidden="true">
+  <div class="raw-download-dialog" role="dialog" aria-modal="true" aria-labelledby="rawDownloadTitle">
+    <div class="raw-download-kicker">RAWDIT · RAW</div>
+    <h2 id="rawDownloadTitle">Download RAW?</h2>
+    <p>Download the original photo to edit it.</p>
+    <div class="raw-download-actions">
+      <button type="button" class="raw-download-cancel" id="rawDownloadCancel">Cancel</button>
+      <button type="button" class="raw-download-confirm" id="rawDownloadConfirm">Download</button>
+    </div>
+  </div>
+</div>
+<style>
+.raw-download-modal{position:fixed;inset:0;z-index:99998;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.raw-download-modal.open{display:flex}
+.raw-download-dialog{width:min(390px,calc(100vw - 40px));padding:25px;background:#111;border:1px solid #2b2b2b;border-radius:16px;box-shadow:0 25px 80px rgba(0,0,0,.62)}
+.raw-download-kicker{color:#777;font-size:8px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px}
+.raw-download-dialog h2{margin:0 0 8px;font-size:22px;line-height:1.15;color:#f5f5f5;font-weight:600}
+.raw-download-dialog p{margin:0;color:#8f8f8f;font-size:11px;line-height:1.6}
+.raw-download-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:21px}
+.raw-download-cancel,.raw-download-confirm{border-radius:999px;padding:9px 15px;font-size:10px;cursor:pointer;font:inherit}
+.raw-download-cancel{border:1px solid #303030;background:transparent;color:#aaa}
+.raw-download-cancel:hover{border-color:#555;color:#eee}
+.raw-download-confirm{border:1px solid #eee;background:#f2f2f2;color:#111}
+.raw-download-confirm:hover{background:#fff}
+</style>
+<script>
+(function(){
+  let rawDownloadPhoto=null;
+  window.rawditConfirmRawDownload=function(photo){
+    if(!photo||photo.type!=="raw")return;
+    rawDownloadPhoto=photo;
+    const modal=document.getElementById("rawDownloadModal");
+    if(!modal)return;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden","false");
+  };
+  function closeModal(){
+    const modal=document.getElementById("rawDownloadModal");
+    if(!modal)return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden","true");
+    rawDownloadPhoto=null;
+  }
+  async function downloadRaw(photo){
+    if(!photo)return;
+
+    const filename=(String(photo.title||"RAWDIT-RAW")
+      .replace(/[\\/:*?"<>|]+/g,"-").trim()||"RAWDIT-RAW")+".jpg";
+
+    try{
+      let blob=null;
+
+      /*
+       * Cloud uploads have a storage path. Use Supabase Storage's download()
+       * instead of navigating to the public image URL. This avoids the
+       * browser "This content is blocked" page and gives us a real Blob
+       * that can be downloaded locally.
+       */
+      const cloud=window.RAWDIT_CLOUD;
+      const client=cloud && cloud.client;
+
+      if(client && photo.storagePath){
+        const result=await client.storage
+          .from("Photos")
+          .download(photo.storagePath);
+
+        if(result && !result.error && result.data){
+          blob=result.data;
+        }else if(result && result.error){
+          console.warn("Supabase RAW download failed:",result.error);
+        }
+      }
+
+      /* Local/data-URL fallback for photos that are not cloud-synced yet. */
+      if(!blob){
+        const url=photo.image||photo.imageUrl||photo.rawUrl||photo.url||photo.src;
+        if(!url)throw new Error("Original RAW file is unavailable.");
+
+        if(String(url).startsWith("data:")){
+          const response=await fetch(url);
+          blob=await response.blob();
+        }else{
+          const response=await fetch(url,{mode:"cors",credentials:"omit"});
+          if(!response.ok)throw new Error("Could not fetch the RAW image.");
+          blob=await response.blob();
+        }
+      }
+
+      const objectUrl=URL.createObjectURL(blob);
+      const a=document.createElement("a");
+      a.href=objectUrl;
+      a.download=filename;
+      a.style.display="none";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(()=>URL.revokeObjectURL(objectUrl),10000);
+
+      setTimeout(()=>{
+        if(typeof showToast==="function"){
+          showToast("Downloaded ✓ Edit the photo and upload your EDIT.");
+        }
+      },150);
+
+    }catch(error){
+      console.error("RAWDIT RAW download failed:",error);
+      if(typeof showToast==="function"){
+        showToast("Could not download this RAW. Please try again.");
+      }else{
+        alert("Could not download this RAW. Please try again.");
+      }
+    }
+  }
+  document.addEventListener("DOMContentLoaded",()=>{
+    document.getElementById("rawDownloadCancel")?.addEventListener("click",closeModal);
+    document.getElementById("rawDownloadConfirm")?.addEventListener("click",()=>{
+      const photo=rawDownloadPhoto; closeModal(); downloadRaw(photo);
+    });
+    document.getElementById("rawDownloadModal")?.addEventListener("click",e=>{
+      if(e.target.id==="rawDownloadModal")closeModal();
+    });
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
   });
 })();
 </script>
