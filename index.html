@@ -1864,7 +1864,7 @@ RAWDIT
 <nav>
 <button id="navRaw" onclick="showPage('raw')">RAW</button>
 <button id="navEdit" onclick="showPage('edit')">EDIT</button>
-<button id="navReview" onclick="showPage('review')">Review</button>
+<button id="navReview" onclick="showPage('review')">Rate</button>
 <button id="navExplore" onclick="showPage('explore')">Explore</button>
 <button id="navChallenges" onclick="showPage('challenges')">Challenges</button>
 <button class="nav-upload" onclick="showPage('upload')">Upload</button>
@@ -1958,7 +1958,7 @@ RAWDIT
 <div class="detail-description">This is the original non-edited image. Every community edit connected to this RAW appears below.</div>
 <div class="detail-actions">
 <button class="btn btn-primary" onclick="showPage('upload')">Create an EDIT</button>
-<button class="btn" onclick="showPage('review')">Review a Photo</button>
+<button class="btn" onclick="showPage('review')">Rate a Photo</button>
 <button class="btn" onclick="showPage('raw')">Back to RAW</button>
 </div>
 </div>
@@ -2031,7 +2031,7 @@ RAWDIT
             </div>
 
             <div class="detail-actions">
-                <button class="btn btn-primary" id="detailReviewButton">Review this photo</button>
+                <button class="btn btn-primary" id="detailReviewButton">Rate this photo</button>
                 <button class="btn" id="detailBackButton">Back</button>
             </div>
         </div>
@@ -2058,8 +2058,8 @@ RAWDIT
     <div class="detail-section">
         <div class="detail-section-head">
             <div>
-                <h3>Community Feedback</h3>
-                <p>Preset feedback from people who reviewed this photo.</p>
+                <h3>Community Ratings</h3>
+                <p>Preset feedback from people who rated this photo.</p>
             </div>
         </div>
         <div class="feedback-summary" id="detailFeedback"></div>
@@ -2097,15 +2097,15 @@ RAWDIT
 <!-- REVIEW -->
 
 <main id="review" class="page">
-<div class="page-hero"><small>BLIND RATING</small><h1>Review</h1><p>Judge the photo first. AI and community scores stay hidden until you submit.</p></div>
+<div class="page-hero"><small>BLIND RATING</small><h1>Rate</h1><p>Judge the photo first. AI and community scores stay hidden until you submit.</p></div>
 
 <div class="rating-page-wrap">
 <div class="rating-layout">
 
 <div class="rating-photo-card" id="ratingPhotoCard">
-    <div class="rating-photo-placeholder" id="ratingPhotoPlaceholder">PHOTO TO REVIEW</div>
+    <div class="rating-photo-placeholder" id="ratingPhotoPlaceholder">PHOTO TO RATE</div>
 
-    <img id="ratingPhotoImage" alt="Photo to review" style="display:none">
+    <img id="ratingPhotoImage" alt="Photo to rate" style="display:none">
 
     <div class="review-compare" id="reviewCompare">
         <div class="review-raw-layer">
@@ -2151,7 +2151,7 @@ RAWDIT
     </div>
 
     <div class="review-once-status" id="reviewOnceStatus">
-        You can review this photo once. After submitting, your rating is locked.
+        You can rate this photo once. After submitting, your rating is locked.
     </div>
 
     <div class="review-next-row">
@@ -3337,7 +3337,7 @@ function openPhotoDetail(photoId){
 
         reviewButton.onclick=()=>rawditConfirmRawDownload(photo);
     }else{
-        reviewButton.textContent="Review this photo";
+        reviewButton.textContent="Rate this photo";
         reviewButton.onclick=()=>{
             showPage("review");
             currentReviewPhoto=photo;
@@ -4129,7 +4129,7 @@ function resetRatingUI(){
         onceStatus.textContent=currentReviewPhoto
             ? (hasReviewedPhoto(currentReviewPhoto.id)
                 ? "You already reviewed this photo. Your rating is locked."
-                : "You can review this photo once. After submitting, your rating is locked.")
+                : "You can rate this photo once. After submitting, your rating is locked.")
             : "Upload a photo first.";
     }
     if(nextButton) updateNextReviewButton();
@@ -4265,7 +4265,7 @@ document.getElementById("nextReviewButton").addEventListener("click",()=>{
     });
 
     if(!candidates.length){
-        showToast("No more reviewable photos yet.");
+        showToast("No more photos to rate yet.");
         return;
     }
 
@@ -4274,7 +4274,7 @@ document.getElementById("nextReviewButton").addEventListener("click",()=>{
     let nextIndex=currentIndex<0 ? 0 : (currentIndex+1)%candidates.length;
 
     if(candidates.length===1 && currentIndex===0){
-        showToast("No other reviewable photos yet.");
+        showToast("No other photos to rate yet.");
         return;
     }
 
