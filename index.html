@@ -935,7 +935,7 @@ header nav #userProfileName{display:none !important}
 }
 
 
-/* ADMIN MODE */
+/* ADMIN MODE — challenge cover editing is visible only to admin */
 .challenge-cover-button,
 .challenge-cover-input{display:none !important}
 body.admin-mode .challenge-cover-button{display:block !important}
@@ -4283,11 +4283,23 @@ function getChallengeCover(challenge){
 }
 
 function changeChallengeCover(challengeId){
+    /* Only unlocked admin mode can open the cover-photo picker. */
+    if(!document.body.classList.contains("admin-mode")){
+        showToast("Admin access required.");
+        return;
+    }
     const input=document.getElementById("challengeCoverInput_"+challengeId);
     if(input)input.click();
 }
 
 function handleChallengeCoverChange(challengeId,input){
+    /* Defense-in-depth: changing a challenge cover is admin-only. */
+    if(!document.body.classList.contains("admin-mode")){
+        if(input)input.value="";
+        showToast("Admin access required.");
+        return;
+    }
+
     const file=input && input.files && input.files[0];
     if(!file)return;
 
@@ -5619,6 +5631,12 @@ document.addEventListener("click",function(e){
 
         const original = window.handleChallengeCoverChange;
         window.handleChallengeCoverChange = function(challengeId, input){
+            if(!document.body.classList.contains("admin-mode")){
+                if(input)input.value="";
+                if(typeof toast === "function") toast("Admin access required.");
+                return;
+            }
+
             const file = input && input.files && input.files[0];
 
             /* Keep the existing local behavior. */
