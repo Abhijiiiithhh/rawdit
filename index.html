@@ -1627,9 +1627,13 @@ body.admin-mode .admin-only-control{display:inline-flex !important}
     overflow:visible;
     padding:0;
   }
-  header nav > button:not(.nav-upload),
+  header nav > button:not(.nav-upload):not(#rawditMobileMenuButton),
   header nav > .admin-nav-button{
     display:none !important;
+  }
+  #rawditMobileMenuButton{
+    display:inline-flex !important;
+    flex:0 0 38px;
   }
   header nav .nav-upload{
     display:inline-flex !important;
@@ -6590,12 +6594,11 @@ Run the one-time SQL supplied with this version before testing admin deletion.
   if(admin){
     admin.addEventListener("click",()=>{
       closeMenu();
-      if(window.RAWDIT_ADMIN && typeof window.RAWDIT_ADMIN.login==="function"){
-        window.RAWDIT_ADMIN.login();
+      const existingAdmin=document.getElementById("adminNavButton");
+      if(existingAdmin){
+        existingAdmin.click();
       }else if(typeof openAdminLogin==="function"){
         openAdminLogin();
-      }else{
-        alert("Admin login is unavailable.");
       }
     });
   }
