@@ -1813,6 +1813,27 @@ body.admin-mode .admin-only-control{display:inline-flex !important}
 }
 </script>
 
+
+<style>
+/* RAWDIT — supporting copy for the RAW edit CTA */
+.raw-edit-cta-copy{
+  display:inline-flex;
+  align-items:center;
+  margin-left:10px;
+  color:#666;
+  font-size:9px;
+  letter-spacing:.15px;
+  vertical-align:middle;
+}
+@media(max-width:600px){
+  .raw-edit-cta-copy{
+    display:block;
+    margin:7px 0 0;
+    font-size:8px;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="username-gate" id="usernameGate">
@@ -3305,6 +3326,15 @@ function openPhotoDetail(photoId){
     const reviewButton=document.getElementById("detailReviewButton");
     if(photo.type==="raw"){
         reviewButton.textContent="Edit this photo";
+
+        const rawCtaCopy=document.createElement("span");
+        rawCtaCopy.className="raw-edit-cta-copy";
+        rawCtaCopy.textContent="Give this RAW your touch.";
+
+        if(reviewButton.parentNode){
+            reviewButton.parentNode.appendChild(rawCtaCopy);
+        }
+
         reviewButton.onclick=()=>rawditConfirmRawDownload(photo);
     }else{
         reviewButton.textContent="Review this photo";
